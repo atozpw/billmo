@@ -1,0 +1,7 @@
+{
+  "name": "billing-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
