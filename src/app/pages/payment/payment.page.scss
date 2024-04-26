@@ -1,8 +1,15 @@
-ion-menu-button {
-    color: var(--ion-color-primary);
+ion-button {
+  --border-radius: 5px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
-ion-button {
-    --padding-top: 14px;
-    --padding-bottom: 14px;
+ion-input {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+
+.list-ios.list-inset {
+  margin-bottom: 12px;
+  border-radius: 5px;
 }
