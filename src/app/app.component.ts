@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import { documentTextOutline, personOutline, home, homeOutline, person, settings, settingsOutline, documentText, wallet, walletOutline, toggle, toggleOutline, people, peopleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +14,15 @@ import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutlin
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Beranda', url: '/home', icon: 'home' },
+    { title: 'Info Pelanggan', url: '/customer', icon: 'people' },
+    { title: 'Buka / Tutup Loket', url: '/counter-status', icon: 'toggle' },
+    { title: 'Pembayaran', url: '/payment', icon: 'wallet' },
+    { title: 'Penerimaan', url: '/report', icon: 'document-text' },
+    { title: 'Akun Saya', url: '/account', icon: 'person' },
+    { title: 'Pengaturan', url: '/setting', icon: 'settings' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+    addIcons({ home, homeOutline, people, peopleOutline, toggle, toggleOutline, wallet, walletOutline, documentText, documentTextOutline, person, personOutline, settings, settingsOutline });
   }
 }
