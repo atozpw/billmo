@@ -35,15 +35,15 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/setting/setting.page').then(m => m.SettingPage)
   },
   {
-    path: 'payment-detail',
-    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then( m => m.PaymentDetailPage)
+    path: 'payment/:id',
+    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage)
   },
   {
     path: 'customer-search',
-    loadComponent: () => import('./pages/customer-search/customer-search.page').then( m => m.CustomerSearchPage)
+    loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage)
   },
   {
     path: 'customer-detail',
-    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then( m => m.CustomerDetailPage)
+    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage)
   },
 ];

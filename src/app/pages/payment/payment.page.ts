@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 })
 export class PaymentPage implements OnInit {
 
+  customerId: string = '';
+
   constructor(private router: Router) {
     addIcons({ search })
   }
@@ -23,7 +25,7 @@ export class PaymentPage implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/payment-detail']);
+    this.router.navigate([`/payment/${this.customerId}`]);
   }
 
 }

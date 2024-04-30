@@ -21,15 +21,23 @@
     </ion-item>
     <ion-item>
       <ion-label>Nomor</ion-label>
-      <ion-label slot="end">000001</ion-label>
+      <ion-label slot="end">{{ customer?.id }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Nama</ion-label>
-      <ion-label slot="end">Asep Suprapto</ion-label>
+      <ion-label slot="end">{{ customer?.name }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Alamat</ion-label>
-      <ion-label slot="end">Jl. Jalan No. 10</ion-label>
+      <ion-label slot="end">{{ customer?.address }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Golongan</ion-label>
+      <ion-label slot="end">{{ customer?.group }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-label slot="end">{{ customer?.status }}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
@@ -38,30 +46,21 @@
         <strong>Data Tagihan</strong>
       </ion-label>
     </ion-item>
-    <ion-item>
-      <ion-checkbox labelPlacement="end" justify="start" mode="ios">Januari 2024</ion-checkbox>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox labelPlacement="end" justify="start" mode="ios">Februari 2024</ion-checkbox>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox labelPlacement="end" justify="start" mode="ios">Maret 2024</ion-checkbox>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox labelPlacement="end" justify="start" mode="ios">April 2024</ion-checkbox>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
+    <ion-item *ngFor="let bill of bills; trackBy:trackItems; index as i">
+      <ion-checkbox labelPlacement="end" justify="start" mode="ios" [(ngModel)]="billChecked[i]"
+        (ionChange)="changeChecked(i)">
+        {{ bill.month }} {{ bill.year }}
+      </ion-checkbox>
+      <ion-label slot="end"><strong>{{ formatNumber(bill.total) }}</strong></ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
     <ion-item>
       <ion-label><strong>Total Bayar</strong></ion-label>
-      <ion-label slot="end" class="payment-amount"><strong>300.000</strong></ion-label>
+      <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(paymentTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" mode="ios">
+  <ion-button expand="block" mode="ios" (click)="test()">
     Bayar
   </ion-button>
 </ion-content>

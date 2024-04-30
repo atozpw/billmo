@@ -12,12 +12,13 @@ export class BillService {
 
   get(id: string) {
     const url = `${environment.baseUrl}/v1/customers/${id}/bills`;
-    const headers = {'Authorization': 'Bearer '};
+    const headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ0OTcyOTMsInN1YiI6ImFkbWluIn0.QYqGHH_0BfRP-7zQy9uJILyTbyxqNmOgnOYR_EB2Aws' };
     const options: HttpOptions = {
       url: url,
       headers: headers
     };
-    return from(CapacitorHttp.get(options));
+    const response = CapacitorHttp.get(options);
+    return from(response);
   }
 
 }
