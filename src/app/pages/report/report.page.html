@@ -1,16 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button color="primary"></ion-menu-button>
     </ion-buttons>
     <ion-title>Penerimaan</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Penerimaan</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light" class="ion-padding">
+  <ion-list mode="ios" lines="none">
+    <ion-item>
+      <ion-select label="Tanggal" label-placement="stacked" value="1">
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+        <ion-select-option value="5">5</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list mode="ios" lines="none">
+    <ion-item>
+      <ion-select label="Bulan" label-placement="stacked" value="4">
+        <ion-select-option value="1">Januari</ion-select-option>
+        <ion-select-option value="2">Februari</ion-select-option>
+        <ion-select-option value="3">Maret</ion-select-option>
+        <ion-select-option value="4">April</ion-select-option>
+        <ion-select-option value="">Mei</ion-select-option>
+        <ion-select-option value="">Juni</ion-select-option>
+        <ion-select-option value="">Juli</ion-select-option>
+        <ion-select-option value="">Agustus</ion-select-option>
+        <ion-select-option value="">September</ion-select-option>
+        <ion-select-option value="">Oktober</ion-select-option>
+        <ion-select-option value="">November</ion-select-option>
+        <ion-select-option value="">Desember</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list mode="ios" lines="none">
+    <ion-item>
+      <ion-input label="Tahun" label-placement="stacked" value="2024"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button id="open-modal" expand="block" mode="ios">
+    Filter
+  </ion-button>
+  <ion-modal #modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>1 April 2024</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">
+              <ion-icon name="close" color="primary"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

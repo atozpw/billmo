@@ -33,7 +33,7 @@
         <strong>Data Tagihan</strong>
       </ion-label>
     </ion-item>
-    <ion-item button detail="true" id="open-modal">
+    <ion-item id="open-modal" button detail="true">
       <ion-label>Januari 2024</ion-label>
       <ion-label slot="end"><strong>100.000</strong></ion-label>
     </ion-item>
@@ -56,7 +56,7 @@
       <ion-label slot="end" class="payment-amount"><strong>300.000</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.75]">
     <ng-template>
       <ion-content>
         <ion-list>

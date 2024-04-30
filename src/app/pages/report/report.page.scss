@@ -1,3 +1,20 @@
-ion-menu-button {
-    color: var(--ion-color-primary);
+ion-button {
+  --border-radius: 5px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+ion-input {
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+}
+
+ion-select {
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+}
+
+ion-list {
+  border-radius: 5px;
+  margin-bottom: 12px;
 }
