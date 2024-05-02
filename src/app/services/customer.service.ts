@@ -12,7 +12,7 @@ export class CustomerService {
 
   get(id: string) {
     const url = `${environment.baseUrl}/v1/customers/${id}`;
-    const headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ0OTcyOTMsInN1YiI6ImFkbWluIn0.QYqGHH_0BfRP-7zQy9uJILyTbyxqNmOgnOYR_EB2Aws' };
+    const headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ1ODI5MDEsInN1YiI6ImFkbWluIn0.aqigfem_1sqTZE2MiC0B5q3qD39-Rt8r4TLaDv_hnHQ' };
     const options: HttpOptions = {
       url: url,
       headers: headers

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, formatNumber } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/app/services/customer.service';
 import { BillService } from 'src/app/services/bill.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { Bill } from 'src/app/interfaces/bill';
   templateUrl: './payment-detail.page.html',
   styleUrls: ['./payment-detail.page.scss'],
   standalone: true,
-  imports: [IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, CommonModule, FormsModule]
+  imports: [IonInput, IonAvatar, IonImg, IonModal, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, CommonModule, FormsModule]
 })
 export class PaymentDetailPage implements OnInit {
 
@@ -74,7 +74,7 @@ export class PaymentDetailPage implements OnInit {
     let sum = 0;
     for (let i = 0; i < this.billChecked.length; i++) {
       if (this.billChecked[i]) {
-        sum += this.bills?.[i].total || 0;
+        sum += parseInt(this.bills?.[i].total || '0');
       }
     }
     this.paymentTotal = sum;
@@ -82,6 +82,10 @@ export class PaymentDetailPage implements OnInit {
 
   formatNumber(value: number): string {
     return formatNumber(value, 'en-US');
+  }
+
+  formatNumberFromString(value: string): string {
+    return formatNumber(parseInt(value), 'en-US');
   }
 
   trackItems(index: number, itemObject: any) {

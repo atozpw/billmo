@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button color="primary"></ion-back-button>
@@ -7,12 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="light">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Detail Pembayaran</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
   <ion-list [inset]="true">
     <ion-item>
       <ion-label>
@@ -51,7 +46,7 @@
         (ionChange)="changeChecked(i)">
         {{ bill.month }} {{ bill.year }}
       </ion-checkbox>
-      <ion-label slot="end"><strong>{{ formatNumber(bill.total) }}</strong></ion-label>
+      <ion-label slot="end"><strong>{{ formatNumberFromString(bill.total) }}</strong></ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
@@ -60,7 +55,27 @@
       <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(paymentTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" mode="ios" (click)="test()">
+  <ion-button id="openModal" expand="block" mode="ios">
     Bayar
   </ion-button>
+  <ion-modal #modal trigger="openModal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+    <ng-template>
+      <ion-content color="light">
+        <ion-list [inset]="true">
+          <ion-item>
+            <ion-input label="Total Tagihan" labelPlacement="stacked" value="0"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Diterima" labelPlacement="stacked" value="0"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Kembalian" labelPlacement="stacked" value="0"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" mode="ios">
+          Bayar
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

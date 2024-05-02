@@ -9,5 +9,5 @@ export interface Bill {
     adminFee: string;
     meterCost: string;
     additionalAmount: string;
-    total: number;
+    total: string;
 }
