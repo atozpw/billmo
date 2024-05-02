@@ -2,11 +2,19 @@ import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpOptions } from '@capacitor/core';
 import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillService {
+
+  // const token = async () => {
+  // const { value } = await Preferences.get({ key: 'auth' });
+  // const data = JSON.parse(value || '');
+  // return data.value;
+  //   return 0;
+  // }
 
   constructor() { }
 

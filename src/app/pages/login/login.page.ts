@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Preferences } from '@capacitor/preferences';
 import {
   IonContent,
   IonHeader,
@@ -33,13 +35,33 @@ import {
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router) { }
+  username: string = '';
+  password: string = '';
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.router.navigate(['/home']);
+    let data = {
+      username: this.username,
+      password: this.password,
+      deviceId: '123456'
+    };
+    this.authService.login(data)
+      .subscribe((auth) => {
+        console.log(auth.data.data);
+        this.setStorage(auth.data.data);
+      });
+    // this.router.navigate(['/home']);
+  }
+
+  setStorage(value: any) {
+    Preferences.set({ key: 'auth', value: JSON.stringify(value) });
   }
 
 }
