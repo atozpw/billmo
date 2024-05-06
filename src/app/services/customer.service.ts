@@ -11,7 +11,18 @@ export class CustomerService {
 
   constructor(private authService: AuthService) { }
 
-  get(id: string) {
+  all(search: string) {
+    const url = `${environment.baseUrl}/v1/customers?search=${search}`;
+    const headers = { 'Authorization': 'Bearer ' + this.authService.token };
+    const options: HttpOptions = {
+      url: url,
+      headers: headers
+    };
+    const response = CapacitorHttp.get(options);
+    return from(response);
+  }
+
+  find(id: string) {
     const url = `${environment.baseUrl}/v1/customers/${id}`;
     const headers = { 'Authorization': 'Bearer ' + this.authService.token };
     const options: HttpOptions = {

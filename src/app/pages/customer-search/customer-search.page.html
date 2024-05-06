@@ -9,34 +9,10 @@
 
 <ion-content color="light">
   <ion-list [inset]="true">
-    <ion-item button detail="true" (click)="detail()">
+    <ion-item *ngFor="let customer of customers; trackBy:trackItems" button detail="true" (click)="findCustomer(customer.id)">
       <ion-label>
-        <h3>000001 &bull; Asep Suprapto</h3>
-        <p>Jl. Jalan No. 10</p>
-      </ion-label>
-    </ion-item>
-    <ion-item button detail="true" (click)="detail()">
-      <ion-label>
-        <h3>000001 &bull; Asep Suprapto</h3>
-        <p>Jl. Jalan No. 10</p>
-      </ion-label>
-    </ion-item>
-    <ion-item button detail="true" (click)="detail()">
-      <ion-label>
-        <h3>000001 &bull; Asep Suprapto</h3>
-        <p>Jl. Jalan No. 10</p>
-      </ion-label>
-    </ion-item>
-    <ion-item button detail="true" (click)="detail()">
-      <ion-label>
-        <h3>000001 &bull; Asep Suprapto</h3>
-        <p>Jl. Jalan No. 10</p>
-      </ion-label>
-    </ion-item>
-    <ion-item button detail="true" (click)="detail()">
-      <ion-label>
-        <h3>000001 &bull; Asep Suprapto</h3>
-        <p>Jl. Jalan No. 10</p>
+        <h3>{{ customer.id }} &bull; {{ customer.name }}</h3>
+        <p>{{ customer.address }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

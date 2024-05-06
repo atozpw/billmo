@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonLabel, IonItem, IonAvatar, IonGrid, IonCol, IonRow, IonButton } from '@ionic/angular/standalone';
+import { AuthService } from 'src/app/services/auth.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-account',
@@ -13,12 +15,17 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 })
 export class AccountPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   logout() {
+    Preferences.remove({ key: 'auth' });
+    this.authService.isAuthenticated = false;
     this.router.navigate(['/login']);
   }
 

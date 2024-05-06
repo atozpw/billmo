@@ -16,15 +16,23 @@
     </ion-item>
     <ion-item>
       <ion-label>Nomor</ion-label>
-      <ion-label slot="end">000001</ion-label>
+      <ion-label slot="end">{{ customer?.id }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Nama</ion-label>
-      <ion-label slot="end">Asep Suprapto</ion-label>
+      <ion-label slot="end">{{ customer?.name }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Alamat</ion-label>
-      <ion-label slot="end">Jl. Jalan No. 10</ion-label>
+      <ion-label slot="end">{{ customer?.address }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Golongan</ion-label>
+      <ion-label slot="end">{{ customer?.group }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-label slot="end">{{ customer?.status }}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
@@ -37,23 +45,15 @@
       <ion-label>Januari 2024</ion-label>
       <ion-label slot="end"><strong>100.000</strong></ion-label>
     </ion-item>
-    <ion-item button detail="true">
-      <ion-label>Februari 2024</ion-label>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
-    </ion-item>
-    <ion-item button detail="true">
-      <ion-label>Maret 2024</ion-label>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
-    </ion-item>
-    <ion-item button detail="true">
-      <ion-label>April 2024</ion-label>
-      <ion-label slot="end"><strong>100.000</strong></ion-label>
+    <ion-item *ngFor="let bill of bills; trackBy:trackItems" button detail="true">
+      <ion-label>{{ bill.month }} {{ bill.year }}</ion-label>
+      <ion-label slot="end"><strong>{{ bill.amount | formatCurrency }}</strong></ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
     <ion-item>
       <ion-label><strong>Total Tagihan</strong></ion-label>
-      <ion-label slot="end" class="payment-amount"><strong>300.000</strong></ion-label>
+      <ion-label slot="end" class="payment-amount"><strong>{{ billAmount | formatCurrency }}</strong></ion-label>
     </ion-item>
   </ion-list>
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.75]">

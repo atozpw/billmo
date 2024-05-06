@@ -13,13 +13,15 @@ import { Router } from '@angular/router';
 })
 export class CustomerPage implements OnInit {
 
+  keyword: string = '';
+
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  search() {
-    this.router.navigate(['/customer-search'])
+  searchCustomer() {
+    this.router.navigate(['/customer-search'], { queryParams: { search: this.keyword } });
   }
 
 }

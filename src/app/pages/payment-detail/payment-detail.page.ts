@@ -37,7 +37,7 @@ export class PaymentDetailPage implements OnInit {
   }
 
   getCustomer(): void {
-    this.customerService.get(this.customerId)
+    this.customerService.find(this.customerId)
       .subscribe((customer) => {
         this.customer = customer.data.data;
       });

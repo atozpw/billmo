@@ -10,10 +10,10 @@
 <ion-content color="light" class="ion-padding">
   <ion-list mode="ios" lines="none">
     <ion-item>
-      <ion-input aria-label="Nomor / Nama Pelanggan" placeholder="Nomor / Nama Pelanggan" [clearInput]="true"></ion-input>
+      <ion-input [(ngModel)]="keyword" aria-label="Nomor / Nama Pelanggan" placeholder="Nomor / Nama Pelanggan" [clearInput]="true"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" mode="ios" (click)="search()">
+  <ion-button expand="block" mode="ios" (click)="searchCustomer()">
     Cari
   </ion-button>
 </ion-content>
