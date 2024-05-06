@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { documentTextOutline, personOutline, home, homeOutline, person, settings, settingsOutline, documentText, wallet, walletOutline, toggle, toggleOutline, people, peopleOutline } from 'ionicons/icons';
 import { AuthService } from './services/auth.service';
+import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
+import { documentTextOutline, personOutline, home, homeOutline, person, settings, settingsOutline, documentText, wallet, walletOutline, toggle, toggleOutline, people, peopleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,23 @@ export class AppComponent {
   constructor(
     private authService: AuthService
   ) {
-    addIcons({ home, homeOutline, people, peopleOutline, toggle, toggleOutline, wallet, walletOutline, documentText, documentTextOutline, person, personOutline, settings, settingsOutline });
-    this.authService.getToken();
+    addIcons({
+      home,
+      homeOutline,
+      people,
+      peopleOutline,
+      toggle,
+      toggleOutline,
+      wallet,
+      walletOutline,
+      documentText,
+      documentTextOutline,
+      person,
+      personOutline,
+      settings,
+      settingsOutline
+    });
+
+    this.authService.authenticated();
   }
 }

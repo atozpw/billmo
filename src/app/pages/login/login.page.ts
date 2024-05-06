@@ -39,9 +39,13 @@ export class LoginPage implements OnInit {
   password: string = '';
 
   constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if (this.authService.isAuthenticated) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   ngOnInit() {
   }
@@ -53,11 +57,16 @@ export class LoginPage implements OnInit {
       deviceId: '123456'
     };
     this.authService.login(data)
-      .subscribe((auth) => {
-        console.log(auth.data.data);
-        this.setStorage(auth.data.data);
+      .subscribe((response) => {
+        if (response.status == 200) {
+          this.setStorage(response.data.data);
+          this.authService.isAuthenticated = true;
+          this.router.navigate(['/home']);
+        }
+        else {
+
+        }
       });
-    // this.router.navigate(['/home']);
   }
 
   setStorage(value: any) {

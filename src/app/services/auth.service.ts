@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CapacitorHttp, HttpOptions } from '@capacitor/core';
+import { CapacitorHttp, HttpHeaders, HttpOptions } from '@capacitor/core';
 import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Preferences } from '@capacitor/preferences';
@@ -11,11 +11,13 @@ export class AuthService {
 
   token: string = '';
 
+  isAuthenticated: boolean = false;
+
   constructor() { }
 
   login(data: any = {}) {
     const url = `${environment.baseUrl}/v1/login`;
-    const headers = {
+    const headers: HttpHeaders = {
       'Content-Type': 'application/json'
     };
     const options: HttpOptions = {
@@ -30,10 +32,14 @@ export class AuthService {
 
   }
 
-  async getToken() {
-    const { value } = await Preferences.get({ key: 'auth' }) || '';
+  async authenticated() {
+    const { value } = await Preferences.get({ key: 'auth' });
     const data = JSON.parse(value || '');
-    this.token = data.token;
+
+    if (data) {
+      this.token = data.token;
+      this.isAuthenticated = true;
+    }
   }
 
 }
