@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { Preferences } from '@capacitor/preferences';
 import {
   IonContent,
   IonHeader,
@@ -60,18 +59,13 @@ export class LoginPage implements OnInit {
     this.authService.login(data)
       .subscribe((response) => {
         if (response.status == 200) {
-          this.setStorage(response.data.data);
-          this.authService.isAuthenticated = true;
+          this.authService.storeAuthentication(response.data.data);
           this.router.navigate(['/home']);
         }
         else {
 
         }
       });
-  }
-
-  setStorage(value: any) {
-    Preferences.set({ key: 'auth', value: JSON.stringify(value) });
   }
 
 }

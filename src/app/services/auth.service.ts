@@ -32,13 +32,19 @@ export class AuthService {
   }
 
   async authenticated() {
+    let auth;
     const { value } = await Preferences.get({ key: 'auth' });
-    const data = JSON.parse(value || '');
-
-    if (data) {
-      this.token = data.token;
+    if (value) auth = JSON.parse(value);
+    if (auth) {
+      this.token = auth.token;
       this.isAuthenticated = true;
     }
+  }
+
+  storeAuthentication(value: any) {
+    Preferences.set({ key: 'auth', value: JSON.stringify(value) });
+    this.isAuthenticated = true;
+    this.token = value.token;
   }
 
 }
