@@ -44,7 +44,7 @@ export class PaymentDetailPage implements OnInit {
   }
 
   getBills(): void {
-    this.billService.get(this.customerId)
+    this.billService.all(this.customerId)
       .subscribe((bills) => {
         this.bills = bills.data.data;
       });

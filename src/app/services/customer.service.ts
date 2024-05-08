@@ -9,7 +9,9 @@ import { AuthService } from './auth.service';
 })
 export class CustomerService {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   all(search: string) {
     const url = `${environment.baseUrl}/v1/customers?search=${search}`;

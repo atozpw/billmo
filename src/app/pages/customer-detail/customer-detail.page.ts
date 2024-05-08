@@ -45,7 +45,7 @@ export class CustomerDetailPage implements OnInit {
   }
 
   getBills() {
-    this.billService.get(this.customerId)
+    this.billService.all(this.customerId)
       .subscribe((response) => {
         this.bills = response.data.data;
         this.calculateBillAmount(response.data.data);

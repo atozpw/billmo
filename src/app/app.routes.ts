@@ -24,6 +24,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/customer/customer.page').then(m => m.CustomerPage)
   },
   {
+    path: 'customer-search',
+    loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage)
+  },
+  {
+    path: 'customer/:id',
+    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage)
+  },
+  {
     path: 'counter-status',
     loadComponent: () => import('./pages/counter-status/counter-status.page').then(m => m.CounterStatusPage)
   },
@@ -31,6 +39,10 @@ export const routes: Routes = [
     path: 'payment',
     loadComponent: () => import('./pages/payment/payment.page').then(m => m.PaymentPage),
     // canActivate: [authGuard]
+  },
+  {
+    path: 'payment/:id',
+    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage)
   },
   {
     path: 'report',
@@ -43,18 +55,6 @@ export const routes: Routes = [
   {
     path: 'setting',
     loadComponent: () => import('./pages/setting/setting.page').then(m => m.SettingPage)
-  },
-  {
-    path: 'payment/:id',
-    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage)
-  },
-  {
-    path: 'customer-search',
-    loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage)
-  },
-  {
-    path: 'customer/:id',
-    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage)
   },
 
 ];

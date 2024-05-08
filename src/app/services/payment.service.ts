@@ -9,9 +9,11 @@ import { AuthService } from './auth.service';
 })
 export class PaymentService {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
-  post(data: any = {}) {
+  store(data: any = {}) {
     const url = `${environment.baseUrl}/v1/payments`;
     const headers = {
       'Authorization': 'Bearer ' + this.authService.token,

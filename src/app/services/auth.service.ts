@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpHeaders, HttpOptions } from '@capacitor/core';
+import { Preferences } from '@capacitor/preferences';
 import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,6 @@ import { Preferences } from '@capacitor/preferences';
 export class AuthService {
 
   token: string = '';
-
   isAuthenticated: boolean = false;
 
   constructor() { }

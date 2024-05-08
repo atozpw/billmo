@@ -9,9 +9,11 @@ import { AuthService } from './auth.service';
 })
 export class BillService {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
-  get(id: string) {
+  all(id: string) {
     const url = `${environment.baseUrl}/v1/customers/${id}/bills`;
     const headers = { 'Authorization': 'Bearer ' + this.authService.token };
     const options: HttpOptions = {
