@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor() { }
 
-  login(data: any = {}) {
+  login(data: any) {
     const url = `${environment.baseUrl}/v1/login`;
     const headers: HttpHeaders = {
       'Content-Type': 'application/json'
@@ -27,8 +27,18 @@ export class AuthService {
     return from(CapacitorHttp.post(options));
   }
 
-  register() {
-
+  register(data: any, tmpToken: string) {
+    const url = `${environment.baseUrl}/v1/register`;
+    const headers: HttpHeaders = {
+      'Authorization': `Bearer ${tmpToken}`,
+      'Content-Type': 'application/json'
+    };
+    const options: HttpOptions = {
+      url: url,
+      headers: headers,
+      data: data
+    };
+    return from(CapacitorHttp.post(options));
   }
 
   async authenticated() {
