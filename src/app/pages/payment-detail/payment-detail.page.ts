@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/app/services/customer.service';
 import { BillService } from 'src/app/services/bill.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/interfaces/customer';
 import { Bill } from 'src/app/interfaces/bill';
 import { PaymentService } from 'src/app/services/payment.service';
@@ -29,6 +29,7 @@ export class PaymentDetailPage implements OnInit {
   paymentReturn: number = 0;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private customerService: CustomerService,
     private billService: BillService,
@@ -84,7 +85,9 @@ export class PaymentDetailPage implements OnInit {
 
     this.paymentService.store(data)
       .subscribe((response) => {
-        console.log(response);
+        if (response.status == 200) {
+          this.router.navigate(['/payment-success', this.paymentId]);
+        }
       });
   }
 

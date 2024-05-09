@@ -22,40 +22,47 @@ export const routes: Routes = [
   },
   {
     path: 'customer',
-    loadComponent: () => import('./pages/customer/customer.page').then(m => m.CustomerPage)
+    loadComponent: () => import('./pages/customer/customer.page').then(m => m.CustomerPage),
+    canActivate: [authGuard]
   },
   {
     path: 'customer-search',
-    loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage)
+    loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage),
+    canActivate: [authGuard]
   },
   {
     path: 'customer/:id',
-    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage)
-  },
-  {
-    path: 'counter-status',
-    loadComponent: () => import('./pages/counter-status/counter-status.page').then(m => m.CounterStatusPage)
+    loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage),
+    canActivate: [authGuard]
   },
   {
     path: 'payment',
     loadComponent: () => import('./pages/payment/payment.page').then(m => m.PaymentPage),
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'payment/:id',
-    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage)
+    loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'payment-success/:id',
+    loadComponent: () => import('./pages/payment-success/payment-success.page').then( m => m.PaymentSuccessPage),
+    canActivate: [authGuard]
   },
   {
     path: 'report',
-    loadComponent: () => import('./pages/report/report.page').then(m => m.ReportPage)
+    loadComponent: () => import('./pages/report/report.page').then(m => m.ReportPage),
+    canActivate: [authGuard]
   },
   {
     path: 'account',
-    loadComponent: () => import('./pages/account/account.page').then(m => m.AccountPage)
+    loadComponent: () => import('./pages/account/account.page').then(m => m.AccountPage),
+    canActivate: [authGuard]
   },
   {
     path: 'setting',
-    loadComponent: () => import('./pages/setting/setting.page').then(m => m.SettingPage)
-  },
-
+    loadComponent: () => import('./pages/setting/setting.page').then(m => m.SettingPage),
+    canActivate: [authGuard]
+  }
 ];
