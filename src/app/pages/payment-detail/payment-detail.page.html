@@ -63,16 +63,16 @@
       <ion-content color="light">
         <ion-list [inset]="true">
           <ion-item>
-            <ion-input label="Total Tagihan" labelPlacement="stacked" value="0"></ion-input>
+            <ion-input [(ngModel)]="paymentTotal" label="Total Tagihan" labelPlacement="stacked" value="0" readonly="true"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input label="Diterima" labelPlacement="stacked" value="0"></ion-input>
+            <ion-input [(ngModel)]="paymentReceived" label="Diterima" labelPlacement="stacked" value="0" (change)="calculatePaymentReturn()"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input label="Kembalian" labelPlacement="stacked" value="0"></ion-input>
+            <ion-input [(ngModel)]="paymentReturn" label="Kembalian" labelPlacement="stacked" value="0" readonly="true"></ion-input>
           </ion-item>
         </ion-list>
-        <ion-button expand="block" mode="ios">
+        <ion-button expand="block" mode="ios" (click)="storePayment()">
           Bayar
         </ion-button>
       </ion-content>

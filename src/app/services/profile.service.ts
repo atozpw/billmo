@@ -7,24 +7,21 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentService {
+export class ProfileService {
 
   constructor(
     private authService: AuthService
   ) { }
 
-  store(data: any) {
-    const url = `${environment.baseUrl}/v1/payments`;
-    const headers = {
-      'Authorization': `Bearer ${this.authService.token}`,
-      'Content-Type': 'application/json'
-    };
+  get() {
+    const url = `${environment.baseUrl}/v1/profile`;
+    const headers = { 'Authorization': `Bearer ${this.authService.token}` };
     const options: HttpOptions = {
       url: url,
-      headers: headers,
-      data: data
+      headers: headers
     };
-    return from(CapacitorHttp.post(options));
+    const response = CapacitorHttp.get(options);
+    return from(response);
   }
 
 }

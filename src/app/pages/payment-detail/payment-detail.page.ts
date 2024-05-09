@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, formatNumber } from '@angular/common';
+import { CommonModule, formatDate, formatNumber } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -7,6 +7,7 @@ import { BillService } from 'src/app/services/bill.service';
 import { ActivatedRoute } from '@angular/router';
 import { Customer } from 'src/app/interfaces/customer';
 import { Bill } from 'src/app/interfaces/bill';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-payment-detail',
@@ -17,21 +18,27 @@ import { Bill } from 'src/app/interfaces/bill';
 })
 export class PaymentDetailPage implements OnInit {
 
-  customerId: string;
   customer?: Customer;
   bills?: Bill[];
+
+  customerId: string = '';
+  paymentId: string = '';
   billChecked: any = [];
   paymentTotal: number = 0;
+  paymentReceived: number = 0;
+  paymentReturn: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private customerService: CustomerService,
-    private billService: BillService
+    private billService: BillService,
+    private paymentService: PaymentService
   ) {
     this.customerId = this.route.snapshot.paramMap.get('id') || '000000';
   }
 
   ngOnInit(): void {
+    this.getPaymentId();
     this.getCustomer();
     this.getBills();
   }
@@ -50,9 +57,35 @@ export class PaymentDetailPage implements OnInit {
       });
   }
 
-  test() {
-    const a = this.bills?.[0];
-    console.log(a?.total);
+  getPaymentId() {
+    let prefix = formatDate(Date.now(), 'yyMMddHHmmss', 'en-US').toString();
+    let mathRandom = Math.random().toString();
+    let randomId = mathRandom.substring(mathRandom.length - 4)
+    this.paymentId = prefix + randomId;
+  }
+
+  storePayment() {
+    let paymentBills = [];
+
+    for (let i = 0; i < this.billChecked.length; i++) {
+      if (this.billChecked[i]) {
+        paymentBills.push({
+          id: this.bills?.[i].id,
+          amount: this.bills?.[i].total
+        });
+      }
+    }
+
+    let data = {
+      id: this.paymentId,
+      amount: this.paymentTotal.toString(),
+      bills: paymentBills
+    }
+
+    this.paymentService.store(data)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   changeChecked(index: number) {
@@ -78,6 +111,11 @@ export class PaymentDetailPage implements OnInit {
       }
     }
     this.paymentTotal = sum;
+    this.paymentReceived = sum;
+  }
+
+  calculatePaymentReturn() {
+    this.paymentReturn = this.paymentReceived - this.paymentTotal;
   }
 
   formatNumber(value: number): string {
