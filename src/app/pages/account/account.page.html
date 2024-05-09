@@ -16,21 +16,23 @@
   <ion-list [inset]="true">
     <ion-item>
       <ion-label>ID</ion-label>
-      <ion-label slot="end">admin</ion-label>
+      <ion-label slot="end">{{ profile?.id }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Nama</ion-label>
-      <ion-label slot="end">Administrator</ion-label>
+      <ion-label slot="end">{{ profile?.name }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Unit</ion-label>
-      <ion-label slot="end">Pusat</ion-label>
+      <ion-label slot="end">{{ profile?.kopel }}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list [inset]="true">
     <ion-item>
       <ion-label>Device ID</ion-label>
-      <ion-label slot="end">87651234</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ deviceId }}</ion-label>
     </ion-item>
   </ion-list>
   <div class="button-container">
