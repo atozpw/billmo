@@ -23,17 +23,17 @@ export const routes: Routes = [
   {
     path: 'customer',
     loadComponent: () => import('./pages/customer/customer.page').then(m => m.CustomerPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'customer-search',
     loadComponent: () => import('./pages/customer-search/customer-search.page').then(m => m.CustomerSearchPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'customer/:id',
     loadComponent: () => import('./pages/customer-detail/customer-detail.page').then(m => m.CustomerDetailPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'payment',
