@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { addIcons } from 'ionicons';
+import { defineCustomElement as defineLoading } from '@ionic/core/components/ion-loading.js';
+import { defineCustomElement as defineToast } from '@ionic/core/components/ion-toast.js';
 import {
   IonApp,
   IonSplitPane,
@@ -71,6 +73,9 @@ export class AppComponent {
     private authService: AuthService,
     private profileService: ProfileService
   ) {
+    defineLoading();
+    defineToast();
+
     addIcons({
       home,
       homeOutline,
