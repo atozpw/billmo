@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BleClient, BleService, textToDataView, numberToUUID } from '@capacitor-community/bluetooth-le';
+import { BleClient, BleService, textToDataView } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { ToastController } from '@ionic/angular';
 import {
@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
   }
 
   async bluetoothConnect(deviceId: string) {
+    console.log('connect..');
     await BleClient.connect(deviceId);
   }
 
@@ -67,17 +68,19 @@ export class HomePage implements OnInit {
       await toast.present();
       Preferences.set({ key: 'bluetoothDeviceId', value: bleDevice.deviceId });
       await this.bluetoothAssignServices();
+      console.log(bleDevice);
     }
   }
 
   async bluetoothAssignServices() {
-    // const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
-    let bleService: BleService[] = await BleClient.getServices("zWDdfuvycSRUq1FyTPQfNw==");
-    // console.log(bleService);
-    if (bleService.length > 0 && bleService[0].characteristics.length > 0) {
+    const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
+    let bleService: BleService[] = await BleClient.getServices(value || "");
+    console.log(JSON.stringify(bleService));
+    if (bleService.length > 0 && bleService[4].characteristics.length > 0) {
       console.log(bleService[0]);
-      Preferences.set({ key: 'bluetoothServiceUuid', value: bleService[0].uuid });
-      Preferences.set({ key: 'bluetoothCharacteristicUuid', value: bleService[0].characteristics[0].uuid });
+      console.log(JSON.stringify(bleService));
+      Preferences.set({ key: 'bluetoothServiceUuid', value: bleService[4].uuid });
+      Preferences.set({ key: 'bluetoothCharacteristicUuid', value: bleService[4].characteristics[0].uuid });
     }
   }
 
@@ -86,6 +89,7 @@ export class HomePage implements OnInit {
   }
 
   async printTurnOnBold(deviceId: string, serviceUuid: string, characteristicUuid: string) {
+    console.log('turn on bold..');
     const boldOn = new Uint8Array([27, 69, 1]);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, new DataView(boldOn.buffer));
   }
@@ -101,6 +105,7 @@ export class HomePage implements OnInit {
   }
 
   async printFeedCenter(deviceId: string, serviceUuid: string, characteristicUuid: string) {
+    console.log('feed center..');
     const center = new Uint8Array([27, 97, 1]);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, new DataView(center.buffer));
   }
@@ -130,9 +135,9 @@ export class HomePage implements OnInit {
   }
 
   async buttonPrint() {
-    const deviceId = "";
-    const serviceUuid = "";
-    const characteristicUuid = "";
+    const deviceId = "66:32:E7:80:C8:A8";
+    const serviceUuid = "e7810a71-73ae-499d-8c15-faa9aef0c3f2";
+    const characteristicUuid = "bef8d6c9-9c21-4c9e-b632-bd58c1009f9f";
 
     await this.bluetoothConnect(deviceId);
 
