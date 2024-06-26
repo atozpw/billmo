@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BleClient, BleService, textToDataView } from '@capacitor-community/bluetooth-le';
+import { BleClient, BleService, textToDataView, numberToUUID } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { ToastController } from '@ionic/angular';
 import {
@@ -71,9 +71,11 @@ export class HomePage implements OnInit {
   }
 
   async bluetoothAssignServices() {
-    const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
-    let bleService: BleService[] = await BleClient.getServices(value || "");
+    // const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
+    let bleService: BleService[] = await BleClient.getServices("zWDdfuvycSRUq1FyTPQfNw==");
+    // console.log(bleService);
     if (bleService.length > 0 && bleService[0].characteristics.length > 0) {
+      console.log(bleService[0]);
       Preferences.set({ key: 'bluetoothServiceUuid', value: bleService[0].uuid });
       Preferences.set({ key: 'bluetoothCharacteristicUuid', value: bleService[0].characteristics[0].uuid });
     }
