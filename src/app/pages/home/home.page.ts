@@ -33,6 +33,10 @@ import {
 })
 export class HomePage implements OnInit {
 
+  deviceId: string = '';
+  serviceUuid: string = '';
+  characteristicUuid: string = '';
+
   constructor(private toastCtrl: ToastController) { }
 
   async bluetoothInit() {
@@ -40,7 +44,6 @@ export class HomePage implements OnInit {
   }
 
   async bluetoothConnect(deviceId: string) {
-    console.log('connect..');
     await BleClient.connect(deviceId);
   }
 
@@ -68,19 +71,16 @@ export class HomePage implements OnInit {
       await toast.present();
       Preferences.set({ key: 'bluetoothDeviceId', value: bleDevice.deviceId });
       await this.bluetoothAssignServices();
-      console.log(bleDevice);
     }
   }
 
   async bluetoothAssignServices() {
     const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
     let bleService: BleService[] = await BleClient.getServices(value || "");
-    console.log(JSON.stringify(bleService));
-    if (bleService.length > 0 && bleService[4].characteristics.length > 0) {
-      console.log(bleService[0]);
+    if (bleService.length > 0 && bleService[3].characteristics.length > 0) {
       console.log(JSON.stringify(bleService));
-      Preferences.set({ key: 'bluetoothServiceUuid', value: bleService[4].uuid });
-      Preferences.set({ key: 'bluetoothCharacteristicUuid', value: bleService[4].characteristics[0].uuid });
+      Preferences.set({ key: 'bluetoothServiceUuid', value: bleService[3].uuid });
+      Preferences.set({ key: 'bluetoothCharacteristicUuid', value: bleService[3].characteristics[0].uuid });
     }
   }
 
@@ -89,7 +89,6 @@ export class HomePage implements OnInit {
   }
 
   async printTurnOnBold(deviceId: string, serviceUuid: string, characteristicUuid: string) {
-    console.log('turn on bold..');
     const boldOn = new Uint8Array([27, 69, 1]);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, new DataView(boldOn.buffer));
   }
@@ -105,7 +104,6 @@ export class HomePage implements OnInit {
   }
 
   async printFeedCenter(deviceId: string, serviceUuid: string, characteristicUuid: string) {
-    console.log('feed center..');
     const center = new Uint8Array([27, 97, 1]);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, new DataView(center.buffer));
   }
@@ -116,56 +114,113 @@ export class HomePage implements OnInit {
   }
 
   async printWriteData(deviceId: string, serviceUuid: string, characteristicUuid: string, text: string) {
-    await this.printLineFeed(deviceId, serviceUuid, characteristicUuid);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, textToDataView(text));
   }
 
   async printUnderLine(deviceId: string, serviceUuid: string, characteristicUuid: string) {
-    await this.printLineFeed(deviceId, serviceUuid, characteristicUuid);
     await BleClient.write(deviceId, serviceUuid, characteristicUuid, textToDataView('-'.repeat(30)));
   }
 
   async printNewEmptyLine(deviceId: string, serviceUuid: string, characteristicUuid: string) {
-    await this.printLineFeed(deviceId, serviceUuid, characteristicUuid);
-    await BleClient.write(deviceId, serviceUuid, characteristicUuid, textToDataView(`${' '.repeat(18)}\n`));
+    await BleClient.write(deviceId, serviceUuid, characteristicUuid, textToDataView(`${' '.repeat(30)}\n`));
   }
 
   ngOnInit() {
     this.bluetoothInit();
   }
 
+  async getDeviceId() {
+    const { value } = await Preferences.get({ key: 'bluetoothDeviceId' });
+    this.deviceId = value || "";
+  }
+
+  async getServiceUuid() {
+    const { value } = await Preferences.get({ key: 'bluetoothServiceUuid' });
+    this.serviceUuid = value || "";
+  }
+
+  async getCharacteristicUuid() {
+    const { value } = await Preferences.get({ key: 'bluetoothCharacteristicUuid' });
+    this.characteristicUuid = value || "";
+  }
+
   async buttonPrint() {
-    const deviceId = "66:32:E7:80:C8:A8";
-    const serviceUuid = "e7810a71-73ae-499d-8c15-faa9aef0c3f2";
-    const characteristicUuid = "bef8d6c9-9c21-4c9e-b632-bd58c1009f9f";
+    await this.getDeviceId();
+    await this.getServiceUuid();
+    await this.getCharacteristicUuid();
 
-    await this.bluetoothConnect(deviceId);
+    await this.bluetoothConnect(this.deviceId);
 
-    await this.printTurnOnBold(deviceId, serviceUuid, characteristicUuid);
-    await this.printFeedCenter(deviceId, serviceUuid, characteristicUuid);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, "PERUMDAM TIRTA RAHARJA");
-    await this.printUnderLine(deviceId, serviceUuid, characteristicUuid);
-    await this.printTurnOffBold(deviceId, serviceUuid, characteristicUuid);
+    // header
+    await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printFeedCenter(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PERUMDAM TIRTA RAHARJA");
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printFeedLeft(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
-    await this.printFeedRight(deviceId, serviceUuid, characteristicUuid);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, "currentDate");
+    // content
+    await this.printFeedLeft(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `No. Trx  : 1234567890123456`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Waktu    : 2024-06-27 09:19:00`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Kasir    : Administrator`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `No. SR   : 000001`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Nama     : ITA WIJAYA`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Alamat   : POJOK NO.75 / 643`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Golongan : 2R1`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Rekening Mei 2024`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Uang Air     : 100.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Beban Tetap  : 20.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Denda        : 5.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : 125.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Rekening Juni 2024`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Uang Air     : 100.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Beban Tetap  : 20.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Denda        : 0`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : 120.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : 245.000`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `#AYOBAYARONLINE`);
+    await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
-    await this.printFeedLeft(deviceId, serviceUuid, characteristicUuid);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, `Customer: Testing`);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, `Item: Testing`);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, `Qty: 1    Weight: 1`);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, `Price: 1000   Amount: 1000`);
+    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
-    await this.printNewEmptyLine(deviceId, serviceUuid, characteristicUuid);
-
-    await this.printFeedCenter(deviceId, serviceUuid, characteristicUuid);
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, "Please Collect after one hour.");
-    await this.printWriteData(deviceId, serviceUuid, characteristicUuid, "---Thank you---");
-    await this.printFeedLeft(deviceId, serviceUuid, characteristicUuid);
-
-    await this.printNewEmptyLine(deviceId, serviceUuid, characteristicUuid);
-
-    await this.bluetoothDisconnect(deviceId);
+    await this.bluetoothDisconnect(this.deviceId);
   }
 
 }
