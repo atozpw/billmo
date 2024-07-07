@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, formatDate, formatNumber } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput, ModalController } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/app/services/customer.service';
 import { BillService } from 'src/app/services/bill.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,6 +31,7 @@ export class PaymentDetailPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private modalCtrl: ModalController,
     private customerService: CustomerService,
     private billService: BillService,
     private paymentService: PaymentService
@@ -86,6 +87,7 @@ export class PaymentDetailPage implements OnInit {
     this.paymentService.store(data)
       .subscribe((response) => {
         if (response.status == 200) {
+          this.modalCtrl.dismiss();
           this.router.navigate(['/payment-success', this.paymentId]);
         }
       });

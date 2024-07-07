@@ -41,34 +41,18 @@
         <strong>Data Tagihan</strong>
       </ion-label>
     </ion-item>
-    <ion-item *ngFor="let bill of bills; trackBy:trackItems" button detail="true" (click)="modalBillDetail()">
+    <ion-item *ngIf="bills?.length === 0">
+      <ion-label>Tidak ada tagihan</ion-label>
+    </ion-item>
+    <ion-item *ngFor="let bill of bills; trackBy:trackItems" button detail="true" (click)="openModal()">
       <ion-label>{{ bill.month }} {{ bill.year }}</ion-label>
       <ion-label slot="end"><strong>{{ bill.total | formatCurrency }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-list [inset]="true">
+  <ion-list *ngIf="billAmount > 0" [inset]="true">
     <ion-item>
       <ion-label><strong>Total Tagihan</strong></ion-label>
       <ion-label slot="end" class="payment-amount"><strong>{{ billAmount | formatCurrency }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-modal [isOpen]="isModalOpen" [canDismiss]="modalDismiss()" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.75]">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Modal</ion-title>
-          <ion-buttons slot="end">
-            <ion-button>Close</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
-          dicta.
-        </p>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>

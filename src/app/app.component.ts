@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { defineCustomElement as defineLoading } from '@ionic/core/components/ion-loading.js';
 import { defineCustomElement as defineToast } from '@ionic/core/components/ion-toast.js';
+import { defineCustomElement as defineModal } from '@ionic/core/components/ion-modal.js';
 import {
   IonApp,
   IonSplitPane,
@@ -75,6 +76,7 @@ export class AppComponent {
   ) {
     defineLoading();
     defineToast();
+    defineModal();
 
     addIcons({
       home,
