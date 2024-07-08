@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BleClient, BleService, textToDataView } from '@capacitor-community/bluetooth-le';
+import { BleClient, textToDataView } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
-import { ToastController } from '@ionic/angular';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCard, IonCardContent } from '@ionic/angular/standalone';
 
 @Component({
@@ -97,10 +96,10 @@ export class PaymentSuccessPage implements OnInit {
 
     // header
     await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printFeedCenter(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PERUMDAM TIRTA RAHARJA");
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PERUMDA AIR MINUM TIRTA DELI");
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printFeedLeft(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "NPWP : 01.457.276.2-125.000");
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -134,6 +133,8 @@ export class PaymentSuccessPage implements OnInit {
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : 0`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : 125.000`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -146,6 +147,8 @@ export class PaymentSuccessPage implements OnInit {
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Denda        : 0`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : 0`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : 120.000`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
