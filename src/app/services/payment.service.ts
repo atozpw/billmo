@@ -13,6 +13,17 @@ export class PaymentService {
     private authService: AuthService
   ) { }
 
+  find(id: string) {
+    const url = `${environment.baseUrl}/v1/payments/${id}`;
+    const headers = { 'Authorization': 'Bearer ' + this.authService.token };
+    const options: HttpOptions = {
+      url: url,
+      headers: headers
+    };
+    const response = CapacitorHttp.get(options);
+    return from(response);
+  }
+
   store(data: any) {
     const url = `${environment.baseUrl}/v1/payments`;
     const headers = {
