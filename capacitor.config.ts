@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.indikalima.billing',
-  appName: 'billing-mobile',
+  appName: 'Billing Mobile',
   webDir: 'www',
   plugins: {
     CapacitorHttp: {
