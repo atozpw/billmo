@@ -1,15 +1,16 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Hasil Pencarian</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <ion-list [inset]="true">
-    <ion-item *ngFor="let customer of customers; trackBy:trackItems" button detail="true" (click)="findCustomer(customer.id)">
+<ion-content>
+  <ion-list lines="none">
+    <ion-item *ngFor="let customer of customers; trackBy:trackItems" button detail="true"
+      (click)="findCustomer(customer.id)">
       <ion-label>
         <h3>{{ customer.id }} &bull; {{ customer.name }}</h3>
         <p>{{ customer.address }}</p>

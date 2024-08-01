@@ -1,15 +1,29 @@
+ion-toolbar {
+  --background: #00205c;
+  --color: white;
+  --min-height: 60px;
+}
+
 ion-button {
+  --background: #3ea6e1;
+  --background-hover: #2b97d5;
+  --background-activated: #2b97d5;
+  --background-focused: #2b97d5;
   --border-radius: 5px;
   margin-left: 0;
   margin-right: 0;
 }
 
-ion-input {
-  --padding-top: 10px;
+ion-input.custom {
+  --background: #f6f8fc;
   --padding-bottom: 10px;
+  --padding-end: 15px;
+  --padding-start: 15px;
+  --padding-top: 10px;
+  --border-radius: 5px;
 }
 
-ion-list {
-  border-radius: 5px;
-  margin-bottom: 12px;
+.button-container {
+  padding-left: 16px;
+  padding-right: 16px;
 }

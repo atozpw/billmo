@@ -1,7 +1,7 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Detail Pembayaran</ion-title>
   </ion-toolbar>
@@ -55,26 +55,33 @@
       <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(paymentTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-button id="openModal" expand="block" mode="ios">
-    Bayar
-  </ion-button>
+  <div class="button-container">
+    <ion-button id="openModal" expand="block" mode="ios">
+      Bayar
+    </ion-button>
+  </div>
   <ion-modal #modal trigger="openModal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
     <ng-template>
       <ion-content color="light">
         <ion-list [inset]="true">
           <ion-item>
-            <ion-input [(ngModel)]="paymentTotal" label="Total Tagihan" labelPlacement="stacked" value="0" readonly="true"></ion-input>
+            <ion-input [(ngModel)]="paymentTotal" label="Total Tagihan" labelPlacement="stacked" value="0"
+              readonly="true"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="paymentReceived" label="Diterima" labelPlacement="stacked" value="0" (change)="calculatePaymentReturn()"></ion-input>
+            <ion-input [(ngModel)]="paymentReceived" label="Diterima" labelPlacement="stacked" value="0"
+              (change)="calculatePaymentReturn()"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="paymentReturn" label="Kembalian" labelPlacement="stacked" value="0" readonly="true"></ion-input>
+            <ion-input [(ngModel)]="paymentReturn" label="Kembalian" labelPlacement="stacked" value="0"
+              readonly="true"></ion-input>
           </ion-item>
         </ion-list>
-        <ion-button expand="block" mode="ios" (click)="storePayment()">
-          Bayar
-        </ion-button>
+        <div class="button-container">
+          <ion-button expand="block" mode="ios" (click)="storePayment()">
+            Bayar
+          </ion-button>
+        </div>
       </ion-content>
     </ng-template>
   </ion-modal>

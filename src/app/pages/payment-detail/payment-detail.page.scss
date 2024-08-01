@@ -1,7 +1,17 @@
+ion-toolbar {
+  --background: #00205c;
+  --color: white;
+  --min-height: 60px;
+}
+
 ion-button {
+  --background: #3ea6e1;
+  --background-hover: #2b97d5;
+  --background-activated: #2b97d5;
+  --background-focused: #2b97d5;
   --border-radius: 5px;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .list-md.list-inset {
@@ -10,4 +20,9 @@ ion-button {
 
 .payment-amount {
   font-size: 18px;
+}
+
+.button-container {
+  padding-left: 16px;
+  padding-right: 16px;
 }
