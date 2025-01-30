@@ -4,5 +4,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 :root {
-    --ion-font-family: "Inter", sans-serif;
+  --ion-font-family: "Inter", sans-serif;
+
+  --ion-color-grey: #8a8a90;
+  --ion-color-grey-rgb: 138, 138, 144;
+  --ion-color-grey-contrast: #ffffff;
+  --ion-color-grey-contrast-rgb: 255, 255, 255;
+  --ion-color-grey-shade: #79797f;
+  --ion-color-grey-tint: #96969b;
+}
+
+.ion-color-grey {
+  --ion-color-base: var(--ion-color-grey);
+  --ion-color-base-rgb: var(--ion-color-grey-rgb);
+  --ion-color-contrast: var(--ion-color-grey-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-grey-contrast-rgb);
+  --ion-color-shade: var(--ion-color-grey-shade);
+  --ion-color-tint: var(--ion-color-grey-tint);
 }

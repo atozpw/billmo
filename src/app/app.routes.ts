@@ -38,31 +38,31 @@ export const routes: Routes = [
   {
     path: 'payment',
     loadComponent: () => import('./pages/payment/payment.page').then(m => m.PaymentPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'payment/:id',
     loadComponent: () => import('./pages/payment-detail/payment-detail.page').then(m => m.PaymentDetailPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'payment-success/:id',
-    loadComponent: () => import('./pages/payment-success/payment-success.page').then( m => m.PaymentSuccessPage),
-    canActivate: [authGuard]
+    loadComponent: () => import('./pages/payment-success/payment-success.page').then(m => m.PaymentSuccessPage),
+    // canActivate: [authGuard]
   },
   {
     path: 'report',
     loadComponent: () => import('./pages/report/report.page').then(m => m.ReportPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'account',
     loadComponent: () => import('./pages/account/account.page').then(m => m.AccountPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'setting',
     loadComponent: () => import('./pages/setting/setting.page').then(m => m.SettingPage),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   }
 ];

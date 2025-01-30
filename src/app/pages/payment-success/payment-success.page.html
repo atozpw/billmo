@@ -1,17 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Pembayaran Berhasil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content color="light">
+  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+  </svg>
+  <ion-text>
+    <h3 class="ion-padding-start ion-padding-end ion-padding-bottom ion-text-center">Pembayaran Berhasil</h3>
+  </ion-text>
   <div class="ion-padding-start ion-padding-end ion-padding-top">
-    <ion-button expand="block" mode="ios" (click)="buttonPrintReceipt()">Cetak Bukti Bayar</ion-button>
+    <ion-button expand="block" mode="ios" (click)="buttonMaintenance()">Cetak Bukti Bayar</ion-button>
   </div>
-  <!-- <div class="ion-padding-start ion-padding-end">
-    <ion-button expand="block" mode="ios" (click)="buttonSendReceipt()">Kirim Bukti Bayar</ion-button>
-  </div> -->
   <div class="ion-padding-start ion-padding-end">
-    <ion-button expand="block" mode="ios" color="medium" (click)="buttonClose()">Tutup</ion-button>
+    <ion-button expand="block" mode="ios" (click)="buttonSendReceipt()">Kirim Bukti Bayar</ion-button>
+  </div>
+  <div class="ion-padding-start ion-padding-end ion-padding-top">
+    <ion-button expand="block" mode="ios" color="grey" (click)="buttonClose()">Tutup</ion-button>
   </div>
 </ion-content>

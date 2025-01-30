@@ -5,14 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BleClient, textToDataView } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { PaymentService } from 'src/app/services/payment.service';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonText, AlertController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-payment-success',
   templateUrl: './payment-success.page.html',
   styleUrls: ['./payment-success.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCard, IonCardContent, CommonModule, FormsModule]
+  imports: [IonText, IonContent, IonButton, CommonModule, FormsModule]
 })
 export class PaymentSuccessPage implements OnInit {
 
@@ -26,7 +26,8 @@ export class PaymentSuccessPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private alertController: AlertController
   ) {
     this.paymentId = this.route.snapshot.paramMap.get('id') || '0';
   }
@@ -181,6 +182,17 @@ export class PaymentSuccessPage implements OnInit {
 
   buttonSendReceipt() {
 
+  }
+
+  async buttonMaintenance() {
+    const alert = await this.alertController.create({
+      header: 'Perhatian',
+      message: 'Fitur sedang dalam pengembangan.',
+      buttons: ['Tutup'],
+      mode: 'ios'
+    });
+
+    await alert.present();
   }
 
   buttonClose() {
