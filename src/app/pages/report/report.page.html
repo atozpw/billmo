@@ -10,39 +10,65 @@
 <ion-content color="light" class="ion-padding">
   <ion-list mode="ios" lines="none">
     <ion-item>
-      <ion-select label="Tanggal" label-placement="stacked" value="1">
+      <ion-select [(ngModel)]="date" label="Tanggal" label-placement="stacked" [value]="date">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
         <ion-select-option value="4">4</ion-select-option>
         <ion-select-option value="5">5</ion-select-option>
+        <ion-select-option value="6">5</ion-select-option>
+        <ion-select-option value="7">5</ion-select-option>
+        <ion-select-option value="8">5</ion-select-option>
+        <ion-select-option value="9">5</ion-select-option>
+        <ion-select-option value="10">5</ion-select-option>
+        <ion-select-option value="11">5</ion-select-option>
+        <ion-select-option value="12">5</ion-select-option>
+        <ion-select-option value="13">5</ion-select-option>
+        <ion-select-option value="14">5</ion-select-option>
+        <ion-select-option value="15">5</ion-select-option>
+        <ion-select-option value="16">5</ion-select-option>
+        <ion-select-option value="17">5</ion-select-option>
+        <ion-select-option value="18">5</ion-select-option>
+        <ion-select-option value="19">5</ion-select-option>
+        <ion-select-option value="20">5</ion-select-option>
+        <ion-select-option value="21">5</ion-select-option>
+        <ion-select-option value="22">5</ion-select-option>
+        <ion-select-option value="23">5</ion-select-option>
+        <ion-select-option value="24">5</ion-select-option>
+        <ion-select-option value="25">5</ion-select-option>
+        <ion-select-option value="26">5</ion-select-option>
+        <ion-select-option value="27">5</ion-select-option>
+        <ion-select-option value="28">5</ion-select-option>
+        <ion-select-option value="29">5</ion-select-option>
+        <ion-select-option value="30">5</ion-select-option>
+        <ion-select-option value="31">5</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-list mode="ios" lines="none">
     <ion-item>
-      <ion-select label="Bulan" label-placement="stacked" value="4">
+      <ion-select [(ngModel)]="month" label="Bulan" label-placement="stacked" [value]="month">
         <ion-select-option value="1">Januari</ion-select-option>
         <ion-select-option value="2">Februari</ion-select-option>
         <ion-select-option value="3">Maret</ion-select-option>
         <ion-select-option value="4">April</ion-select-option>
-        <ion-select-option value="">Mei</ion-select-option>
-        <ion-select-option value="">Juni</ion-select-option>
-        <ion-select-option value="">Juli</ion-select-option>
-        <ion-select-option value="">Agustus</ion-select-option>
-        <ion-select-option value="">September</ion-select-option>
-        <ion-select-option value="">Oktober</ion-select-option>
-        <ion-select-option value="">November</ion-select-option>
-        <ion-select-option value="">Desember</ion-select-option>
+        <ion-select-option value="5">Mei</ion-select-option>
+        <ion-select-option value="6">Juni</ion-select-option>
+        <ion-select-option value="7">Juli</ion-select-option>
+        <ion-select-option value="8">Agustus</ion-select-option>
+        <ion-select-option value="9">September</ion-select-option>
+        <ion-select-option value="10">Oktober</ion-select-option>
+        <ion-select-option value="11">November</ion-select-option>
+        <ion-select-option value="12">Desember</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-list mode="ios" lines="none">
     <ion-item>
-      <ion-input label="Tahun" label-placement="stacked" value="2024"></ion-input>
+      <ion-input [(ngModel)]="year" label="Tahun" label-placement="stacked"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button id="open-modal" expand="block" mode="ios">
+  <ion-button (click)="showReport()" expand="block" mode="ios">
     Filter
   </ion-button>
   <ion-modal #modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">

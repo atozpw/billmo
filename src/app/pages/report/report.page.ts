@@ -19,8 +19,10 @@ import {
   IonDatetimeButton,
   IonDatetime,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  ModalController,
 } from '@ionic/angular/standalone';
+import { ReportComponent } from 'src/app/components/report/report.component';
 
 @Component({
   selector: 'app-report',
@@ -50,14 +52,39 @@ import {
 })
 export class ReportPage implements OnInit {
 
-  constructor() {
+  date: string = '';
+  month: string = '';
+  year: string = '';
+
+  constructor(
+    private modalCtrl: ModalController,
+  ) {
     addIcons({ close })
   }
 
   ngOnInit() {
+    const now = new Date();
+    this.date = now.getDate().toString();
+    this.month = (now.getMonth() + 1).toString();
+    this.year = now.getFullYear().toString();
   }
 
   cancel() {
+  }
+
+  async showReport() {
+    const date = this.date.length === 1 ? "0" + this.date : this.date;
+    const month = this.month.length === 1 ? "0" + this.month : this.month;
+    const year = this.year;
+
+    const fullDate = year + "-" + month + "-" + date;
+
+    const modal = await this.modalCtrl.create({
+      component: ReportComponent,
+      componentProps: { date: fullDate },
+    });
+
+    modal.present();
   }
 
   onWillDismiss(event: Event) {
