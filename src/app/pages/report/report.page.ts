@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatNumber, formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
@@ -21,15 +21,17 @@ import {
   IonSelect,
   IonSelectOption,
   ModalController,
+  LoadingController, IonLabel, IonFooter
 } from '@ionic/angular/standalone';
 import { ReportComponent } from 'src/app/components/report/report.component';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
   styleUrls: ['./report.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonFooter, IonLabel,
     IonIcon,
     IonModal,
     IonInput,
@@ -52,43 +54,52 @@ import { ReportComponent } from 'src/app/components/report/report.component';
 })
 export class ReportPage implements OnInit {
 
-  date: string = '';
-  month: string = '';
-  year: string = '';
+  fullDate: string = '';
+  trxTotalAmount: number = 0;
+
+  reports: any;
+  loading: any;
 
   constructor(
+    private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
+    private reportService: ReportService,
   ) {
     addIcons({ close })
   }
 
   ngOnInit() {
-    const now = new Date();
-    this.date = now.getDate().toString();
-    this.month = (now.getMonth() + 1).toString();
-    this.year = now.getFullYear().toString();
+    const date = new Date();
+    this.fullDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
+    this.getReports();
   }
 
-  cancel() {
+  getReports() {
+    this.showLoading();
+    this.reportService.all(this.fullDate)
+      .subscribe((response) => {
+        this.hideLoading();
+        this.reports = response.data.data;
+      });
   }
 
-  async showReport() {
-    const date = this.date.length === 1 ? "0" + this.date : this.date;
-    const month = this.month.length === 1 ? "0" + this.month : this.month;
-    const year = this.year;
+  trackItems(index: number, itemObject: any) {
+    return itemObject.id;
+  }
 
-    const fullDate = year + "-" + month + "-" + date;
-
-    const modal = await this.modalCtrl.create({
-      component: ReportComponent,
-      componentProps: { date: fullDate },
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+      mode: 'ios'
     });
-
-    modal.present();
+    this.loading.present();
   }
 
-  onWillDismiss(event: Event) {
-    console.log(event);
+  hideLoading() {
+    this.loading.dismiss();
+  }
+
+  formatNumberFromString(value: string): string {
+    return formatNumber(parseInt(value), 'en-US');
   }
 
 }

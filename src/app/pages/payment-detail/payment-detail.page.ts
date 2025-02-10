@@ -24,6 +24,7 @@ export class PaymentDetailPage implements OnInit {
   customerId: string = '';
   paymentId: string = '';
   billChecked: any = [];
+  billTotal: number = 0;
   paymentTotal: number = 0;
   paymentReceived: number = 0;
   paymentReturn: number = 0;
@@ -115,8 +116,9 @@ export class PaymentDetailPage implements OnInit {
         sum += parseInt(this.bills?.[i].total || '0');
       }
     }
-    this.paymentTotal = sum;
-    this.paymentReceived = sum;
+    this.billTotal = sum;
+    this.paymentTotal = sum + 5000;
+    this.paymentReceived = sum + 5000;
   }
 
   calculatePaymentReturn() {

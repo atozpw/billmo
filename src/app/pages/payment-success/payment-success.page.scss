@@ -1,4 +1,4 @@
-ion-content {
+ion-content.success {
   --padding-top: 100px;
 }
 
@@ -64,4 +64,13 @@ ion-button {
   --border-radius: 5px;
   margin-left: 0;
   margin-right: 0;
+}
+
+ion-input.custom {
+  --background: #f6f8fc;
+  --padding-bottom: 10px;
+  --padding-end: 15px;
+  --padding-start: 15px;
+  --padding-top: 10px;
+  --border-radius: 5px;
 }

@@ -1,3 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding">
+  <h3>Penerimaan</h3>
+  <h5>Tanggal {{ date }}</h5>
 
+  <ion-list>
+    <ion-item *ngFor="let report of reports; trackBy:trackItems">
+      <ion-label>
+        <h3>test</h3>
+        <p>-</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

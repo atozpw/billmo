@@ -1,4 +1,4 @@
-<ion-content color="light">
+<ion-content class="success" color="light">
   <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
     <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
     <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
@@ -10,9 +10,22 @@
     <ion-button expand="block" mode="ios" (click)="buttonMaintenance()">Cetak Bukti Bayar</ion-button>
   </div>
   <div class="ion-padding-start ion-padding-end">
-    <ion-button expand="block" mode="ios" (click)="buttonSendReceipt()">Kirim Bukti Bayar</ion-button>
+    <ion-button id="openModalWhatsapp" expand="block" mode="ios">Kirim Bukti Bayar</ion-button>
   </div>
   <div class="ion-padding-start ion-padding-end ion-padding-top">
     <ion-button expand="block" mode="ios" color="grey" (click)="buttonClose()">Tutup</ion-button>
   </div>
+  <ion-modal #modal trigger="openModalWhatsapp" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <div class="ion-padding-top">
+          <ion-input type="text" [(ngModel)]="whatsappNumber" class="custom" aria-label="Nomor WhatsApp"
+            placeholder="Ketik Nomor WhatsApp" [clearInput]="true"></ion-input>
+        </div>
+        <ion-button expand="block" mode="ios" (click)="buttonSendReceipt()">
+          Kirim
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -51,30 +51,42 @@
   </ion-list>
   <ion-list [inset]="true">
     <ion-item>
-      <ion-label><strong>Total Bayar</strong></ion-label>
-      <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(paymentTotal) }}</strong></ion-label>
+      <ion-label><strong>Total Tagihan</strong></ion-label>
+      <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(billTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
   <div class="button-container">
-    <ion-button id="openModal" expand="block" mode="ios">
+    <ion-button id="openModalPayment" expand="block" mode="ios">
       Bayar
     </ion-button>
   </div>
-  <ion-modal #modal trigger="openModal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+  <ion-modal #modal trigger="openModalPayment" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
     <ng-template>
       <ion-content color="light">
         <ion-list [inset]="true">
           <ion-item>
-            <ion-input [(ngModel)]="paymentTotal" label="Total Tagihan" labelPlacement="stacked" value="0"
-              readonly="true"></ion-input>
+            <ion-label>
+              Total Tagihan
+            </ion-label>
+            <ion-label slot="end">
+              {{ formatNumber(billTotal) }}
+            </ion-label>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="paymentReceived" label="Diterima" labelPlacement="stacked" value="0"
-              (change)="calculatePaymentReturn()"></ion-input>
+            <ion-label>
+              Biaya Layanan
+            </ion-label>
+            <ion-label slot="end">
+              {{ formatNumber(5000) }}
+            </ion-label>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="paymentReturn" label="Kembalian" labelPlacement="stacked" value="0"
-              readonly="true"></ion-input>
+            <ion-label>
+              <strong>Total Bayar</strong>
+            </ion-label>
+            <ion-label slot="end">
+              <strong>{{ formatNumber(paymentTotal) }}</strong>
+            </ion-label>
           </ion-item>
         </ion-list>
         <div class="button-container">

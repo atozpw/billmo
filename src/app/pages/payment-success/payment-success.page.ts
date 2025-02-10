@@ -5,14 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BleClient, textToDataView } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { PaymentService } from 'src/app/services/payment.service';
-import { IonContent, IonButton, IonText, AlertController } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonText, AlertController, IonModal, IonList, IonItem, IonInput } from '@ionic/angular/standalone';
+import { ReceiptService } from 'src/app/services/receipt.service';
 
 @Component({
   selector: 'app-payment-success',
   templateUrl: './payment-success.page.html',
   styleUrls: ['./payment-success.page.scss'],
   standalone: true,
-  imports: [IonText, IonContent, IonButton, CommonModule, FormsModule]
+  imports: [IonInput, IonItem, IonList, IonModal, IonText, IonContent, IonButton, CommonModule, FormsModule]
 })
 export class PaymentSuccessPage implements OnInit {
 
@@ -21,12 +22,15 @@ export class PaymentSuccessPage implements OnInit {
   deviceId: string = '';
   serviceUuid: string = '';
   characteristicUuid: string = '';
+
   paymentId: string = '';
+  whatsappNumber: string = '';
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private paymentService: PaymentService,
+    private receiptService: ReceiptService,
     private alertController: AlertController
   ) {
     this.paymentId = this.route.snapshot.paramMap.get('id') || '0';
@@ -181,7 +185,16 @@ export class PaymentSuccessPage implements OnInit {
   }
 
   buttonSendReceipt() {
-
+    let data = {
+      number: this.whatsappNumber,
+      trxId: this.paymentId
+    }
+    this.receiptService.send(data)
+      .subscribe((response) => {
+        if (response.status == 200) {
+          console.log(response);
+        }
+      });
   }
 
   async buttonMaintenance() {
