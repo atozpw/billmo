@@ -57,6 +57,7 @@ export class SettingPage implements OnInit {
     await this.bluetoothInit();
     let bleDevice = await BleClient.requestDevice({ allowDuplicates: false });
     if (bleDevice) {
+      this.deviceId = bleDevice.deviceId;
       await BleClient.connect(bleDevice.deviceId, this.bluetoothDisconnect);
       const toast = await this.toastCtrl.create({
         message: 'Connected',

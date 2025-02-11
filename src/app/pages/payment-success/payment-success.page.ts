@@ -119,9 +119,9 @@ export class PaymentSuccessPage implements OnInit {
     await this.bluetoothConnect(this.deviceId);
 
     await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PERUMDA AIR MINUM TIRTA DELI");
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PDAM TIRTA OGAN");
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "NPWP : 01.457.276.2-125.000");
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "NPWP : 02.543.074.5.312.000");
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -159,8 +159,6 @@ export class PaymentSuccessPage implements OnInit {
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : 0`);
-      await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : ${bill.total}`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       grandTotal += parseInt(bill.total);
@@ -168,15 +166,14 @@ export class PaymentSuccessPage implements OnInit {
 
     await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${grandTotal}`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total Tag.   : ${grandTotal}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : 5000`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `#AYOBAYARONLINE`);
-    await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${grandTotal + 5000}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
+    await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
