@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatNumber } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BleClient, textToDataView } from '@capacitor-community/bluetooth-le';
@@ -151,26 +151,30 @@ export class PaymentSuccessPage implements OnInit {
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Rekening ${bill.month} ${bill.year}`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Uang Air     : ${bill.amount}`);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Stand Meter  : ${bill.lastWm} - ${bill.currentWm}`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Beban Tetap  : ${parseInt(bill.adminFee) + parseInt(bill.meterCost)}`);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Pemakaian    : ${bill.waterUsage} m3`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Denda        : ${bill.additionalAmount}`);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Uang Air     : ${this.formatNumberFromString(bill.amount)}`);
+      await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Beban Tetap  : ${this.formatNumber(parseInt(bill.adminFee) + parseInt(bill.meterCost))}`);
+      await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Denda        : ${this.formatNumberFromString(bill.additionalAmount)}`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Materai      : 0`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : ${bill.total}`);
+      await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total        : ${this.formatNumberFromString(bill.total)}`);
       await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
       grandTotal += parseInt(bill.total);
     }
 
     await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total Tag.   : ${grandTotal}`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total Tag.   : ${this.formatNumber(grandTotal)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : 5000`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : ${this.formatNumber(5000)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${grandTotal + 5000}`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${this.formatNumber(grandTotal + 5000)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -203,6 +207,14 @@ export class PaymentSuccessPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  formatNumber(value: number): string {
+    return formatNumber(value, 'en-US');
+  }
+
+  formatNumberFromString(value: string): string {
+    return formatNumber(parseInt(value), 'en-US');
   }
 
   buttonClose() {
