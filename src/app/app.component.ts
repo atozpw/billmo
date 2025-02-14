@@ -5,6 +5,8 @@ import { addIcons } from 'ionicons';
 import { defineCustomElement as defineLoading } from '@ionic/core/components/ion-loading.js';
 import { defineCustomElement as defineToast } from '@ionic/core/components/ion-toast.js';
 import { defineCustomElement as defineModal } from '@ionic/core/components/ion-modal.js';
+import { AuthService } from './services/auth.service';
+import { ProfileService } from './services/profile.service';
 import {
   IonApp,
   IonSplitPane,
@@ -33,8 +35,6 @@ import {
   settings,
   settingsOutline
 } from 'ionicons/icons';
-import { AuthService } from './services/auth.service';
-import { ProfileService } from './services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -93,14 +93,16 @@ export class AppComponent {
       settingsOutline
     });
 
-    this.authService.authenticated();
-    // this.checkSession();
+    this.checkSession();
   }
 
-  checkSession() {
+  async checkSession() {
+    await this.authService.authenticated();
+
     this.profileService.get()
       .subscribe((response) => {
         if (response.status == 401) {
+          this.authService.isAuthenticated = false;
           this.router.navigate(['/login']);
         }
       });

@@ -7,13 +7,10 @@ import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonList,
   IonItem,
-  IonButton
+  IonButton,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -23,9 +20,6 @@ import {
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonInput,
     IonList,
     IonItem,
@@ -62,7 +56,6 @@ export class LoginPage implements OnInit {
     let data = {
       username: this.username,
       password: this.password,
-      // deviceId: '123456'
       deviceId: this.deviceId
     };
     this.authService.login(data)

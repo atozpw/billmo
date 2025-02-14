@@ -1,20 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, formatDate, formatNumber } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, IonButton, IonModal, IonImg, IonAvatar, IonInput, ModalController } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/app/services/customer.service';
 import { BillService } from 'src/app/services/bill.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/interfaces/customer';
 import { Bill } from 'src/app/interfaces/bill';
 import { PaymentService } from 'src/app/services/payment.service';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonList,
+  IonItem,
+  IonCheckbox,
+  IonLabel,
+  IonButton,
+  IonModal,
+  ModalController,
+  LoadingController, IonSkeletonText
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-payment-detail',
   templateUrl: './payment-detail.page.html',
   styleUrls: ['./payment-detail.page.scss'],
   standalone: true,
-  imports: [IonInput, IonAvatar, IonImg, IonModal, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonList, IonItem, IonCheckbox, IonNote, IonLabel, CommonModule, FormsModule]
+  imports: [IonSkeletonText,
+    IonModal,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonBackButton,
+    IonList,
+    IonItem,
+    IonCheckbox,
+    IonLabel,
+    CommonModule,
+    FormsModule,
+  ]
 })
 export class PaymentDetailPage implements OnInit {
 
@@ -29,10 +59,13 @@ export class PaymentDetailPage implements OnInit {
   paymentReceived: number = 0;
   paymentReturn: number = 0;
 
+  loading: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
+    private loadingCtrl: LoadingController,
     private customerService: CustomerService,
     private billService: BillService,
     private paymentService: PaymentService
@@ -70,6 +103,8 @@ export class PaymentDetailPage implements OnInit {
   storePayment() {
     let paymentBills = [];
 
+    this.showLoading();
+
     for (let i = 0; i < this.billChecked.length; i++) {
       if (this.billChecked[i]) {
         paymentBills.push({
@@ -88,6 +123,7 @@ export class PaymentDetailPage implements OnInit {
     this.paymentService.store(data)
       .subscribe((response) => {
         if (response.status == 200) {
+          this.hideLoading();
           this.modalCtrl.dismiss();
           this.router.navigate(['/payment-success', this.paymentId]);
         }
@@ -135,6 +171,17 @@ export class PaymentDetailPage implements OnInit {
 
   trackItems(index: number, itemObject: any) {
     return itemObject.id;
+  }
+
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+      mode: 'ios'
+    });
+    this.loading.present();
+  }
+
+  hideLoading() {
+    this.loading.dismiss();
   }
 
 }

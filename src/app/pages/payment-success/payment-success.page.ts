@@ -5,15 +5,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BleClient, textToDataView } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { PaymentService } from 'src/app/services/payment.service';
-import { IonContent, IonButton, IonText, AlertController, IonModal, IonList, IonItem, IonInput } from '@ionic/angular/standalone';
 import { ReceiptService } from 'src/app/services/receipt.service';
+import {
+  IonContent,
+  IonButton,
+  IonText,
+  AlertController,
+  IonModal,
+  IonInput,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-payment-success',
   templateUrl: './payment-success.page.html',
   styleUrls: ['./payment-success.page.scss'],
   standalone: true,
-  imports: [IonInput, IonItem, IonList, IonModal, IonText, IonContent, IonButton, CommonModule, FormsModule]
+  imports: [
+    IonInput,
+    IonModal,
+    IonText,
+    IonContent,
+    IonButton,
+    CommonModule,
+    FormsModule,
+  ]
 })
 export class PaymentSuccessPage implements OnInit {
 
