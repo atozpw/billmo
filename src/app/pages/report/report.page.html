@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
+<ion-content class="ion-padding" color="light">
+  <div class="card">
     <ion-input type="date" [(ngModel)]="fullDate" class="custom" aria-label="Tanggal Penerimaan"
       placeholder="Pilih Tanggal">
     </ion-input>
@@ -16,8 +16,10 @@
       Filter
     </ion-button>
   </div>
+  @if (reports.length > 0) {
   <ion-list>
-    <ion-item *ngFor="let report of reports; trackBy:trackItems">
+    <ion-item *ngFor="let report of reports; trackBy:trackItems; index as i"
+      [lines]="reports.length - 1 === i ? 'none' : ''">
       <ion-label>
         <h3>{{ report.customerNo }} &bull; {{ report.customerName }}</h3>
         <p>{{ report.trxTime }}</p>
@@ -25,11 +27,16 @@
       <ion-label slot="end"><strong>{{ formatNumberFromString(report.trxTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
+  } @else {
+  <div class="card ion-text-center">
+    <strong>Tidak ada data</strong>
+  </div>
+  }
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="">
     <ion-title>Total</ion-title>
-    <ion-title slot="end">{{ trxTotalAmount }}</ion-title>
+    <ion-title slot="end">{{ formatNumber(trxTotalAmount) }}</ion-title>
   </ion-toolbar>
 </ion-footer>

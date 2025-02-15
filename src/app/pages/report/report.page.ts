@@ -20,8 +20,13 @@ import {
   IonDatetime,
   IonSelect,
   IonSelectOption,
+  IonCard,
+  IonCardContent,
+  IonLabel,
+  IonFooter,
+  IonSkeletonText,
   ModalController,
-  LoadingController, IonLabel, IonFooter
+  LoadingController,
 } from '@ionic/angular/standalone';
 import { ReportComponent } from 'src/app/components/report/report.component';
 import { ReportService } from 'src/app/services/report.service';
@@ -31,7 +36,9 @@ import { ReportService } from 'src/app/services/report.service';
   templateUrl: './report.page.html',
   styleUrls: ['./report.page.scss'],
   standalone: true,
-  imports: [IonFooter, IonLabel,
+  imports: [
+    IonFooter,
+    IonLabel,
     IonIcon,
     IonModal,
     IonInput,
@@ -48,16 +55,20 @@ import { ReportService } from 'src/app/services/report.service';
     IonDatetime,
     IonSelect,
     IonSelectOption,
+    IonCard,
+    IonCardContent,
+    IonSkeletonText,
     CommonModule,
     FormsModule
   ]
 })
 export class ReportPage implements OnInit {
 
+  reports: any = [];
+
   fullDate: string = '';
   trxTotalAmount: number = 0;
 
-  reports: any;
   loading: any;
 
   constructor(
@@ -80,7 +91,18 @@ export class ReportPage implements OnInit {
       .subscribe((response) => {
         this.hideLoading();
         this.reports = response.data.data;
+        this.calculateTotalAmount(response.data.data);
       });
+  }
+
+  calculateTotalAmount(data: any) {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i]) {
+        sum += parseInt(data[i].trxTotal || '0');
+      }
+    }
+    this.trxTotalAmount = sum;
   }
 
   trackItems(index: number, itemObject: any) {
@@ -96,6 +118,10 @@ export class ReportPage implements OnInit {
 
   hideLoading() {
     this.loading.dismiss();
+  }
+
+  formatNumber(value: number): string {
+    return formatNumber(value, 'en-US');
   }
 
   formatNumberFromString(value: string): string {
