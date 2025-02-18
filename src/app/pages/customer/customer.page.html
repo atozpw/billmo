@@ -7,15 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list lines="none" class="ion-padding-top">
-    <ion-item>
-      <ion-input [(ngModel)]="keyword" class="custom" aria-label="Nomor / Nama Pelanggan"
-        placeholder="Nomor / Nama Pelanggan" [clearInput]="true"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div class="button-container">
-    <ion-button expand="block" mode="ios" (click)="searchCustomer()">
+<ion-content class="ion-padding" color="light">
+  <div class="card">
+    <ion-input type="text" [(ngModel)]="keyword" class="custom" aria-label="Nomor Pelanggan"
+      placeholder="Ketik Nomor / Nama Pelanggan" [clearInput]="true">
+    </ion-input>
+    <ion-button class="mt-10" expand="block" mode="ios" (click)="searchCustomer()">
       Cari
     </ion-button>
   </div>

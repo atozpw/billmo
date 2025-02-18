@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding" color="light">
-  <ion-list class="ion-margin-bottom">
+  <ion-list>
     <ion-item>
       <ion-label>
         <strong>Data Pelanggan</strong>
@@ -69,7 +69,7 @@
       }
     </ion-item>
   </ion-list>
-  <ion-list class="ion-margin-bottom">
+  <ion-list>
     <ion-item>
       <ion-label>
         <strong>Data Tagihan</strong>
@@ -98,19 +98,19 @@
     }
   </ion-list>
   @if (billTotal > 0) {
-  <ion-list class="ion-margin-bottom" lines="none">
+  <ion-list lines="none">
     <ion-item>
       <ion-label><strong>Total Tagihan</strong></ion-label>
       <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(billTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
-  <ion-button id="openModalPayment" expand="block" mode="ios">
+  <ion-button id="openModalPayment" class="ion-margin-top" expand="block" mode="ios">
     Bayar
   </ion-button>
   <ion-modal #modal trigger="openModalPayment" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
     <ng-template>
       <ion-content class="ion-padding" color="light">
-        <ion-list class="ion-margin-bottom">
+        <ion-list>
           <ion-item>
             <ion-label>
               Total Tagihan
@@ -136,7 +136,7 @@
             </ion-label>
           </ion-item>
         </ion-list>
-        <ion-button expand="block" mode="ios" (click)="storePayment()">
+        <ion-button class="ion-margin-top" expand="block" mode="ios" (click)="storePayment()">
           Bayar
         </ion-button>
       </ion-content>

@@ -3,6 +3,7 @@ import { CommonModule, formatNumber, formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
+import { ReportService } from 'src/app/services/report.service';
 import {
   IonContent,
   IonHeader,
@@ -14,22 +15,10 @@ import {
   IonList,
   IonItem,
   IonButton,
-  IonModal,
-  IonIcon,
-  IonDatetimeButton,
-  IonDatetime,
-  IonSelect,
-  IonSelectOption,
-  IonCard,
-  IonCardContent,
   IonLabel,
-  IonFooter,
-  IonSkeletonText,
   ModalController,
   LoadingController,
 } from '@ionic/angular/standalone';
-import { ReportComponent } from 'src/app/components/report/report.component';
-import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-report',
@@ -37,10 +26,7 @@ import { ReportService } from 'src/app/services/report.service';
   styleUrls: ['./report.page.scss'],
   standalone: true,
   imports: [
-    IonFooter,
     IonLabel,
-    IonIcon,
-    IonModal,
     IonInput,
     IonContent,
     IonHeader,
@@ -51,13 +37,6 @@ import { ReportService } from 'src/app/services/report.service';
     IonList,
     IonItem,
     IonButton,
-    IonDatetimeButton,
-    IonDatetime,
-    IonSelect,
-    IonSelectOption,
-    IonCard,
-    IonCardContent,
-    IonSkeletonText,
     CommonModule,
     FormsModule
   ]
@@ -73,7 +52,6 @@ export class ReportPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController,
     private reportService: ReportService,
   ) {
     addIcons({ close })

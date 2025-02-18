@@ -12,7 +12,7 @@
     <ion-input type="date" [(ngModel)]="fullDate" class="custom" aria-label="Tanggal Penerimaan"
       placeholder="Pilih Tanggal">
     </ion-input>
-    <ion-button expand="block" mode="ios" (click)="getReports()">
+    <ion-button class="mt-10" expand="block" mode="ios" (click)="getReports()">
       Filter
     </ion-button>
   </div>
@@ -27,16 +27,15 @@
       <ion-label slot="end"><strong>{{ formatNumberFromString(report.trxTotal) }}</strong></ion-label>
     </ion-item>
   </ion-list>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label><strong>Total Penerimaan</strong></ion-label>
+      <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(trxTotalAmount) }}</strong></ion-label>
+    </ion-item>
+  </ion-list>
   } @else {
   <div class="card ion-text-center">
     <strong>Tidak ada data</strong>
   </div>
   }
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar class="">
-    <ion-title>Total</ion-title>
-    <ion-title slot="end">{{ formatNumber(trxTotalAmount) }}</ion-title>
-  </ion-toolbar>
-</ion-footer>
