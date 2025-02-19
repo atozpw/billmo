@@ -22,6 +22,7 @@ export class SettingPage implements OnInit {
   constructor(private toastCtrl: ToastController) { }
 
   async ngOnInit() {
+    await this.bluetoothInit();
     await this.getDeviceId();
   }
 

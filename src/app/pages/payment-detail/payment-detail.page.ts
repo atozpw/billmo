@@ -116,7 +116,9 @@ export class PaymentDetailPage implements OnInit {
 
     let data = {
       id: this.paymentId,
-      amount: this.paymentTotal.toString(),
+      amount: this.billTotal.toString(),
+      fee: "5000",
+      total: this.paymentTotal.toString(),
       bills: paymentBills
     }
 

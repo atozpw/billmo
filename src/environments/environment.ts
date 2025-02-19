@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  version: 'v1.5',
   baseUrl: 'http://127.0.0.1:5500'
 };
 

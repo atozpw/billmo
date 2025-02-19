@@ -14,7 +14,7 @@ export class ReportService {
   ) { }
 
   all(date: string) {
-    const url = `${environment.baseUrl}/v1/payments?date=${date}`;
+    const url = `${environment.baseUrl}/v1/reports?date=${date}`;
     const headers = { 'Authorization': 'Bearer ' + this.authService.token };
     const options: HttpOptions = {
       url: url,

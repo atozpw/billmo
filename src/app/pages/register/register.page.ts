@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 import {
   IonContent,
   IonHeader,
@@ -36,6 +37,8 @@ import {
 })
 export class RegisterPage implements OnInit {
 
+  appVersion: string = '';
+
   verificationCode: string = '';
   deviceId: string = '';
   token: string = '';
@@ -54,6 +57,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.getDeviceId();
+    this.getVersion();
   }
 
   register() {
@@ -99,6 +103,10 @@ export class RegisterPage implements OnInit {
 
   hideLoading() {
     this.loading.dismiss();
+  }
+
+  getVersion() {
+    this.appVersion = environment.version;
   }
 
 }

@@ -1,9 +1,10 @@
 <ion-content>
   <div class="container">
-    <h2 class="ion-text-center">Billing v1.0-beta</h2>
+    <h2 class="ion-text-center">Billing {{ appVersion }}</h2>
     <ion-list lines="none">
       <ion-item>
-        <ion-input [(ngModel)]="verificationCode" aria-label="Kode Verifikasi" placeholder="Kode Verifikasi" class="custom" mode="ios"></ion-input>
+        <ion-input [(ngModel)]="verificationCode" aria-label="Kode Verifikasi" placeholder="Kode Verifikasi"
+          class="custom" mode="ios"></ion-input>
       </ion-item>
     </ion-list>
     <div class="button-container">

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 import {
   IonContent,
   IonInput,
@@ -30,6 +31,8 @@ import {
 })
 export class LoginPage implements OnInit {
 
+  appVersion: string = '';
+
   username: string = '';
   password: string = '';
   deviceId: string = '';
@@ -49,6 +52,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.getDeviceId();
+    this.getVersion();
   }
 
   login() {
@@ -98,6 +102,10 @@ export class LoginPage implements OnInit {
 
   hideLoading() {
     this.loading.dismiss();
+  }
+
+  getVersion() {
+    this.appVersion = environment.version;
   }
 
 }

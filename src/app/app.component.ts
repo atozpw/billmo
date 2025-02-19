@@ -7,6 +7,7 @@ import { defineCustomElement as defineToast } from '@ionic/core/components/ion-t
 import { defineCustomElement as defineModal } from '@ionic/core/components/ion-modal.js';
 import { AuthService } from './services/auth.service';
 import { ProfileService } from './services/profile.service';
+import { environment } from 'src/environments/environment';
 import {
   IonApp,
   IonSplitPane,
@@ -60,6 +61,9 @@ import {
   ],
 })
 export class AppComponent {
+
+  appVersion: string = '';
+
   public appPages = [
     { title: 'Beranda', url: '/home', icon: 'home' },
     { title: 'Info Pelanggan', url: '/customer', icon: 'people' },
@@ -94,6 +98,7 @@ export class AppComponent {
     });
 
     this.checkSession();
+    this.getVersion();
   }
 
   async checkSession() {
@@ -107,4 +112,9 @@ export class AppComponent {
         }
       });
   }
+
+  getVersion() {
+    this.appVersion = environment.version;
+  }
+
 }
