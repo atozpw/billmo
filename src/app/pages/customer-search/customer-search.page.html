@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list lines="none">
-    <ion-item *ngFor="let customer of customers; trackBy:trackItems" button detail="true"
-      (click)="findCustomer(customer.id)">
+<ion-content class="ion-padding" color="light">
+  <ion-list>
+    <ion-item *ngFor="let customer of customers; trackBy:trackItems; index as i" button detail="true"
+      (click)="findCustomer(customer.id)" [lines]="customers.length - 1 === i ? 'none' : ''">
       <ion-label>
         <h3>{{ customer.id }} &bull; {{ customer.name }}</h3>
         <p>{{ customer.address }}</p>

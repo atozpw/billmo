@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, IonItem, IonLabel, IonList, IonCheckbox, IonImg, IonSearchbar, IonModal, IonAvatar, IonButton, ModalController } from '@ionic/angular/standalone';
 import { Customer } from 'src/app/interfaces/customer';
 import { Bill } from 'src/app/interfaces/bill';
 import { ActivatedRoute } from '@angular/router';
@@ -10,13 +9,38 @@ import { BillService } from 'src/app/services/bill.service';
 import { FormatCurrencyPipe } from 'src/app/pipes/format-currency.pipe';
 import { LoadingController } from '@ionic/angular';
 import { BillDetailComponent } from 'src/app/components/bill-detail/bill-detail.component';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonBackButton,
+  IonButtons,
+  IonItem,
+  IonLabel,
+  IonList,
+  ModalController
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-customer-detail',
   templateUrl: './customer-detail.page.html',
   styleUrls: ['./customer-detail.page.scss'],
   standalone: true,
-  imports: [IonButton, FormatCurrencyPipe, IonSearchbar, IonImg, IonCheckbox, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, IonModal, IonAvatar, CommonModule, FormsModule]
+  imports: [
+    FormatCurrencyPipe,
+    IonList,
+    IonLabel,
+    IonItem,
+    IonButtons,
+    IonBackButton,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule
+  ]
 })
 export class CustomerDetailPage implements OnInit {
 

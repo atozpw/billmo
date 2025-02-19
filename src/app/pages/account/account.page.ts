@@ -5,16 +5,42 @@ import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { Device } from '@capacitor/device';
 import { LoadingController } from '@ionic/angular';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonLabel, IonItem, IonAvatar, IonGrid, IonCol, IonRow, IonButton } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonList,
+  IonLabel,
+  IonItem,
+  IonAvatar,
+  IonButton
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
   standalone: true,
-  imports: [IonButton, IonRow, IonCol, IonGrid, IonItem, IonLabel, IonList, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonAvatar, CommonModule, FormsModule]
+  imports: [
+    IonButton,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonAvatar,
+    CommonModule,
+    FormsModule
+  ]
 })
 export class AccountPage implements OnInit {
 

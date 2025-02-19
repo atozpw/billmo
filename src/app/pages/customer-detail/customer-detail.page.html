@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <ion-list [inset]="true">
+<ion-content class="ion-padding" color="light">
+  <ion-list>
     <ion-item>
       <ion-label>
         <strong>Data Pelanggan</strong>
@@ -24,35 +24,45 @@
     </ion-item>
     <ion-item>
       <ion-label>Alamat</ion-label>
+      @if (customer && customer.address.length > 25) {
+      <ion-label slot="end">{{ customer.address | slice:0:25 }}...</ion-label>
+      } @else {
       <ion-label slot="end">{{ customer?.address }}</ion-label>
+      }
     </ion-item>
     <ion-item>
       <ion-label>Golongan</ion-label>
       <ion-label slot="end">{{ customer?.group }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>Status</ion-label>
       <ion-label slot="end">{{ customer?.status }}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-list [inset]="true">
+  <ion-list>
     <ion-item>
       <ion-label>
         <strong>Data Tagihan</strong>
       </ion-label>
     </ion-item>
-    <ion-item *ngIf="bills?.length === 0">
-      <ion-label>Tidak ada tagihan</ion-label>
-    </ion-item>
-    <ion-item *ngFor="let bill of bills; trackBy:trackItems" button detail="true" (click)="openModal()">
+    @if (bills && bills.length > 0) {
+    <ion-item *ngFor="let bill of bills; trackBy:trackItems; index as i" button detail="true" (click)="openModal()"
+      [lines]="bills.length - 1 === i ? 'none' : ''">
       <ion-label>{{ bill.month }} {{ bill.year }}</ion-label>
       <ion-label slot="end"><strong>{{ bill.total | formatCurrency }}</strong></ion-label>
     </ion-item>
+    } @else {
+    <ion-item lines="none">
+      <ion-label>Tidak ada tagihan</ion-label>
+    </ion-item>
+    }
   </ion-list>
-  <ion-list *ngIf="billAmount > 0" [inset]="true">
+  @if (billAmount > 0) {
+  <ion-list lines="none">
     <ion-item>
       <ion-label><strong>Total Tagihan</strong></ion-label>
       <ion-label slot="end" class="payment-amount"><strong>{{ billAmount | formatCurrency }}</strong></ion-label>
     </ion-item>
   </ion-list>
+  }
 </ion-content>

@@ -4,14 +4,36 @@ import { FormsModule } from '@angular/forms';
 import { BleClient, BleService } from '@capacitor-community/bluetooth-le';
 import { Preferences } from '@capacitor/preferences';
 import { ToastController } from '@ionic/angular';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonLabel, IonList, IonItem } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonLabel,
+  IonList,
+  IonItem
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
   styleUrls: ['./setting.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonList, IonItem, IonMenuButton, CommonModule, FormsModule]
+  imports: [
+    IonLabel,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonList,
+    IonItem,
+    IonMenuButton,
+    CommonModule,
+    FormsModule
+  ]
 })
 export class SettingPage implements OnInit {
 

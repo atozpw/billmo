@@ -7,13 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
+<ion-content class="ion-padding" color="light">
   <div class="card-avatar">
     <ion-avatar>
       <img alt="User Image" src="./assets/avatar.svg" />
     </ion-avatar>
   </div>
-  <ion-list [inset]="true">
+  <ion-list>
     <ion-item>
       <ion-label>ID</ion-label>
       <ion-label slot="end">{{ profile?.id }}</ion-label>
@@ -22,22 +22,20 @@
       <ion-label>Nama</ion-label>
       <ion-label slot="end">{{ profile?.name }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>Unit</ion-label>
       <ion-label slot="end">{{ profile?.kopel }}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-list [inset]="true">
+  <ion-list>
     <ion-item>
       <ion-label>Device ID</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>{{ deviceId }}</ion-label>
     </ion-item>
   </ion-list>
-  <div class="button-container">
-    <ion-button expand="block" mode="ios" color="danger" class="button-custom" (click)="logout()">
-      Logout
-    </ion-button>
-  </div>
+  <ion-button expand="block" mode="ios" color="danger" class="button-custom" (click)="logout()">
+    Logout
+  </ion-button>
 </ion-content>
