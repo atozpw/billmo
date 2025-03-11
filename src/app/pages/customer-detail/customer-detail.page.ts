@@ -68,8 +68,8 @@ export class CustomerDetailPage implements OnInit {
     this.getBills();
   }
 
-  getCustomer() {
-    this.showLoading();
+  async getCustomer() {
+    await this.showLoading();
     this.customerService.find(this.customerId)
       .subscribe((response) => {
         this.hideLoading();

@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding" color="light">
   <div class="card">
-    <ion-input type="text" [(ngModel)]="customerId" class="custom" aria-label="Nomor Pelanggan"
+    <ion-input inputmode="numeric" [(ngModel)]="customerId" class="custom" aria-label="Nomor Pelanggan"
       placeholder="Ketik Nomor Pelanggan" [clearInput]="true">
     </ion-input>
     <ion-button class="mt-10" expand="block" mode="ios" (click)="search()">

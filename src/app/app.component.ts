@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { App } from '@capacitor/app';
 import { addIcons } from 'ionicons';
 import { defineCustomElement as defineLoading } from '@ionic/core/components/ion-loading.js';
 import { defineCustomElement as defineToast } from '@ionic/core/components/ion-toast.js';
@@ -20,7 +21,8 @@ import {
   IonItem,
   IonIcon,
   IonLabel,
-  IonRouterOutlet
+  IonRouterOutlet,
+  Platform
 } from '@ionic/angular/standalone';
 import {
   home,
@@ -62,6 +64,7 @@ import {
 })
 export class AppComponent {
 
+  clientName: string = '';
   appVersion: string = '';
 
   public appPages = [
@@ -76,7 +79,9 @@ export class AppComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private platform: Platform,
+    @Optional() private routerOutlet?: IonRouterOutlet
   ) {
     defineLoading();
     defineToast();
@@ -97,13 +102,13 @@ export class AppComponent {
       settingsOutline
     });
 
+    // this.backButtonInit();
     this.checkSession();
-    this.getVersion();
+    this.getEnvironment();
   }
 
   async checkSession() {
     await this.authService.authenticated();
-
     this.profileService.get()
       .subscribe((response) => {
         if (response.status == 401) {
@@ -113,7 +118,16 @@ export class AppComponent {
       });
   }
 
-  getVersion() {
+  // backButtonInit() {
+  //   this.platform.backButton.subscribeWithPriority(-1, () => {
+  //     if (!this.routerOutlet?.canGoBack()) {
+  //       App.exitApp();
+  //     }
+  //   });
+  // }
+
+  getEnvironment() {
+    this.clientName = environment.clientName;
     this.appVersion = environment.version;
   }
 

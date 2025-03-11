@@ -23,6 +23,7 @@ import {
   ModalController,
   LoadingController, IonSkeletonText
 } from '@ionic/angular/standalone';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment-detail',
@@ -61,6 +62,8 @@ export class PaymentDetailPage implements OnInit {
 
   loading: any;
 
+  clientFee: number = 0;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -77,6 +80,11 @@ export class PaymentDetailPage implements OnInit {
     this.getPaymentId();
     this.getCustomer();
     this.getBills();
+    this.getEnvironment();
+  }
+
+  getEnvironment(): void {
+    this.clientFee = environment.clientFee;
   }
 
   getCustomer(): void {
@@ -117,7 +125,7 @@ export class PaymentDetailPage implements OnInit {
     let data = {
       id: this.paymentId,
       amount: this.billTotal.toString(),
-      fee: "5000",
+      fee: this.clientFee.toString(),
       total: this.paymentTotal.toString(),
       bills: paymentBills
     }
@@ -155,8 +163,8 @@ export class PaymentDetailPage implements OnInit {
       }
     }
     this.billTotal = sum;
-    this.paymentTotal = sum + 5000;
-    this.paymentReceived = sum + 5000;
+    this.paymentTotal = sum + this.clientFee;
+    this.paymentReceived = sum + this.clientFee;
   }
 
   calculatePaymentReturn() {

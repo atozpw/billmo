@@ -14,6 +14,7 @@ import {
   IonModal,
   IonInput,
 } from '@ionic/angular/standalone';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment-success',
@@ -134,9 +135,9 @@ export class PaymentSuccessPage implements OnInit {
     await this.bluetoothConnect(this.deviceId);
 
     await this.printTurnOnBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "PDAM TIRTA OGAN");
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, environment.clientName.toUpperCase());
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, "NPWP : 02.543.074.5.312.000");
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `NPWP : ${environment.clientNpwp}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printTurnOffBold(this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -187,9 +188,9 @@ export class PaymentSuccessPage implements OnInit {
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Total Tag.   : ${this.formatNumber(grandTotal)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : ${this.formatNumber(5000)}`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `By. Layanan  : ${this.formatNumber(environment.clientFee)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
-    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${this.formatNumber(grandTotal + 5000)}`);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${this.formatNumber(grandTotal + environment.clientFee)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
