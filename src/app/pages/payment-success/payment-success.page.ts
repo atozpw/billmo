@@ -10,9 +10,10 @@ import {
   IonContent,
   IonButton,
   IonText,
-  AlertController,
   IonModal,
   IonInput,
+  AlertController,
+  ToastController
 } from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment';
 
@@ -47,23 +48,23 @@ export class PaymentSuccessPage implements OnInit {
     private route: ActivatedRoute,
     private paymentService: PaymentService,
     private receiptService: ReceiptService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastCtrl: ToastController
   ) {
     this.paymentId = this.route.snapshot.paramMap.get('id') || '0';
   }
 
   async ngOnInit() {
-    this.getPayment();
     await this.getDeviceId();
     await this.getServiceUuid();
     await this.getCharacteristicUuid();
+    await this.getPayment();
   }
 
-  getPayment() {
+  async getPayment() {
     this.paymentService.find(this.paymentId)
       .subscribe((payment) => {
         this.payment = payment.data.data;
-        console.log(payment.data.data);
       });
   }
 
