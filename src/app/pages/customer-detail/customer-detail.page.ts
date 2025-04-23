@@ -19,8 +19,11 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonIcon,
   ModalController
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { copy } from 'ionicons/icons';
 
 @Component({
   selector: 'app-customer-detail',
@@ -38,6 +41,7 @@ import {
     IonHeader,
     IonTitle,
     IonToolbar,
+    IonIcon,
     CommonModule,
     FormsModule
   ]
@@ -60,6 +64,8 @@ export class CustomerDetailPage implements OnInit {
     private modalCtrl: ModalController,
     private billService: BillService
   ) {
+    addIcons({ copy });
+
     this.customerId = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
 
