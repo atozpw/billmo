@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Clipboard } from '@capacitor/clipboard';
 import { Customer } from 'src/app/interfaces/customer';
 import { Bill } from 'src/app/interfaces/bill';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +21,8 @@ import {
   IonLabel,
   IonList,
   IonIcon,
-  ModalController
+  ModalController,
+  ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { copy } from 'ionicons/icons';
@@ -62,6 +64,7 @@ export class CustomerDetailPage implements OnInit {
     private customerService: CustomerService,
     private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
     private billService: BillService
   ) {
     addIcons({ copy });
@@ -119,6 +122,19 @@ export class CustomerDetailPage implements OnInit {
       initialBreakpoint: 0.75
     });
     modal.present();
+  }
+
+  async copyCustomerId() {
+    await Clipboard.write({
+      string: this.customerId
+    });
+
+    const toast = await this.toastCtrl.create({
+      message: 'Nomor Pelanggan telah disalin',
+      duration: 2000,
+      position: 'bottom',
+    });
+    await toast.present();
   }
 
 }

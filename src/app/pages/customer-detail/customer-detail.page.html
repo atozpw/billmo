@@ -17,7 +17,7 @@
     <ion-item>
       <ion-label>Nomor</ion-label>
       <ion-label slot="end">
-        {{ customer?.id }} <a><ion-icon name="copy"></ion-icon></a>
+        {{ customer?.id }} <a (click)="copyCustomerId()"><ion-icon name="copy"></ion-icon></a>
       </ion-label>
     </ion-item>
     <ion-item>
