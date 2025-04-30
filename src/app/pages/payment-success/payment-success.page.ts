@@ -193,6 +193,14 @@ export class PaymentSuccessPage implements OnInit {
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Grand Total  : ${this.formatNumber(grandTotal + environment.clientFee)}`);
     await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printUnderLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `Resi ini dibuat oleh komputer`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `dan merupakan alat bukti`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
+    await this.printWriteData(this.deviceId, this.serviceUuid, this.characteristicUuid, `pembayaran yang sah`);
+    await this.printLineFeed(this.deviceId, this.serviceUuid, this.characteristicUuid);
 
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);
     await this.printNewEmptyLine(this.deviceId, this.serviceUuid, this.characteristicUuid);

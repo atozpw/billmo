@@ -30,7 +30,10 @@
   <ion-list lines="none">
     <ion-item>
       <ion-label><strong>Total Penerimaan</strong></ion-label>
-      <ion-label slot="end" class="payment-amount"><strong>{{ formatNumber(trxTotalAmount) }}</strong></ion-label>
+      <ion-label slot="end" class="payment-amount ion-text-end">
+        <strong>{{ formatNumber(reports.length) }}</strong> transaksi <br>
+        <strong>{{ formatNumber(trxTotalAmount) }}</strong>
+      </ion-label>
     </ion-item>
   </ion-list>
   } @else {
